@@ -2329,6 +2329,158 @@ button {
   transform: translateX(-100%);
 }
 
+/* =====================================================
+   FINAL FIX
+   修正房間完全不顯示 / game-screen 重複 / curtain 擋住
+   ===================================================== */
+
+
+/* 舊的全螢幕窗簾完全停用 */
+#curtain-screen {
+  display: none !important;
+  pointer-events: none !important;
+}
+
+
+/* 真正的遊戲畫面 */
+#game-screen.game-screen {
+  position: fixed !important;
+
+  left: 0 !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+
+  width: 100vw !important;
+  height: 100vh !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+
+  z-index: 100 !important;
+
+  background: #d9c8aa !important;
+}
+
+
+/* game wrapper */
+#game-screen .game-wrapper {
+  position: relative !important;
+
+  width: min(1220px, 94vw) !important;
+
+  margin: 0 auto !important;
+  padding: 28px 0 60px !important;
+}
+
+
+/* 房間本體 */
+#game-screen .room {
+  position: relative !important;
+
+  width: 100% !important;
+
+  height: auto !important;
+
+  aspect-ratio: 16 / 9 !important;
+
+  min-height: 600px !important;
+
+  overflow: hidden !important;
+
+  margin: 0 auto !important;
+}
+
+
+/* 確保真正房間裡的所有物件可以出現 */
+#game-screen .room > * {
+  box-sizing: border-box;
+}
+
+
+/* 房間內窗簾動畫 */
+#curtain-transition {
+  position: absolute !important;
+
+  inset: 0 !important;
+
+  z-index: 900 !important;
+
+  pointer-events: none !important;
+}
+
+
+/* 窗簾打開後不要擋東西 */
+#curtain-transition.open {
+  pointer-events: none !important;
+}
+
+
+/* 防止 transition 本身遮住整個房間 */
+#curtain-transition .transition-left,
+#curtain-transition .transition-right {
+  pointer-events: none !important;
+}
+
+
+/* =====================================================
+   IMPORTANT
+   如果有 hidden，一定真的隱藏
+   ===================================================== */
+
+.hidden {
+  display: none !important;
+}
+
+
+/* =====================================================
+   房間提示
+   ===================================================== */
+
+#room-message {
+  position: fixed !important;
+
+  left: 50% !important;
+  bottom: 32px !important;
+
+  transform: translateX(-50%) !important;
+
+  z-index: 5000 !important;
+
+  pointer-events: none !important;
+}
+
+
+/* =====================================================
+   避免 modal / overlay 蓋住整個房間
+   ===================================================== */
+
+#game-screen .modal {
+  z-index: 6000 !important;
+}
+
+
+/* =====================================================
+   手機 / 小螢幕
+   ===================================================== */
+
+@media (max-width: 800px) {
+
+  #game-screen .game-wrapper {
+    width: 96vw !important;
+    padding-top: 15px !important;
+  }
+
+  #game-screen .room {
+    min-height: 500px !important;
+    aspect-ratio: auto !important;
+  }
+
+}
+
 #curtain-transition.open .transition-right {
   transform: translateX(100%);
 }
