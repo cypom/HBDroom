@@ -2125,3 +2125,69 @@ button {
   }
 
 }
+
+/* =====================================================
+   LOGIN FIX
+   ===================================================== */
+
+#login-screen {
+  position: fixed !important;
+  inset: 0 !important;
+
+  z-index: 999999 !important;
+
+  display: flex !important;
+
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: auto !important;
+}
+
+#login-screen.hidden {
+  display: none !important;
+}
+
+#login-screen .login-box {
+  position: relative !important;
+
+  z-index: 1000000 !important;
+
+  pointer-events: auto !important;
+}
+
+#password-form {
+  position: relative !important;
+
+  z-index: 1000001 !important;
+
+  pointer-events: auto !important;
+}
+
+#password-input {
+  position: relative !important;
+
+  z-index: 1000002 !important;
+
+  pointer-events: auto !important;
+
+  user-select: text !important;
+
+  -webkit-user-select: text !important;
+
+  cursor: text !important;
+
+  opacity: 1 !important;
+}
+
+#access-button {
+  position: relative !important;
+
+  z-index: 1000002 !important;
+
+  pointer-events: auto !important;
+
+  cursor: pointer !important;
+
+  opacity: 1 !important;
+}
