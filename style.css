@@ -1,6 +1,6 @@
-/* =========================================================
-   RESET
-========================================================= */
+/* ==================================================
+   BASIC
+================================================== */
 
 * {
   box-sizing: border-box;
@@ -15,247 +15,374 @@ body {
 }
 
 body {
-  background: #171511;
-  color: #eee2c9;
-  font-family: "Courier New", "Noto Sans TC", monospace;
+  background: #181511;
+  color: #f5ead3;
+  font-family: monospace;
+  overflow-x: hidden;
   image-rendering: pixelated;
 }
 
-button,
-input {
-  font: inherit;
-}
 
-button {
-  cursor: pointer;
-}
-
-.hidden {
-  display: none !important;
-}
-
-
-/* =========================================================
+/* ==================================================
    LOGIN
-========================================================= */
+================================================== */
 
 #login-screen {
-  width: 100%;
-  min-height: 100vh;
+  width: 100vw;
+  height: 100vh;
+  min-height: 600px;
+
+  background:
+    #17130f;
 
   display: flex;
   align-items: center;
   justify-content: center;
-
-  background: #171511;
-  padding: 24px;
 }
 
 .login-box {
-  width: min(520px, 92vw);
-  padding: 48px 40px;
+  width: 420px;
+  max-width: 90vw;
 
-  border: 4px solid #75674f;
-  background: #211e19;
+  border: 6px solid #695744;
+  background: #211b15;
+
+  padding: 50px 40px;
 
   text-align: center;
 
-  box-shadow: 8px 8px 0 #0d0c0a;
+  box-shadow:
+    12px 12px 0 #0b0907;
 }
 
-.login-small {
-  color: #9e9176;
-  font-size: 12px;
+.login-title {
+  font-size: 25px;
   letter-spacing: 4px;
-  margin-bottom: 22px;
-}
-
-.login-box h1 {
-  margin: 0;
-  color: #f0e2c5;
-  font-size: clamp(20px, 4vw, 30px);
-  letter-spacing: 3px;
+  margin-bottom: 40px;
 }
 
 .login-line {
-  width: 80px;
-  height: 4px;
-  margin: 28px auto;
-  background: #a99772;
+  font-size: 18px;
+  margin-bottom: 16px;
 }
 
-.login-hint {
-  color: #a69b88;
-  font-size: 13px;
+.login-sub {
+  color: #a99476;
+  font-size: 12px;
   margin-bottom: 20px;
 }
 
-#password-form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
 #password-input {
-  width: 100%;
-  padding: 15px;
+  width: 180px;
+  height: 50px;
 
-  border: 3px solid #75674f;
-  outline: none;
+  display: block;
+  margin: 0 auto 18px;
 
-  background: #11100e;
-  color: #f3e8d2;
+  border: 4px solid #7c674e;
+
+  background: #100d0a;
+  color: #f8e7c6;
 
   text-align: center;
-  letter-spacing: 8px;
-  font-size: 20px;
+
+  font-family: monospace;
+  font-size: 22px;
+
+  outline: none;
 }
 
 #password-input:focus {
-  border-color: #c1aa7c;
+  border-color: #c5a978;
 }
 
-#access-button {
-  padding: 14px;
+#login-button {
+  width: 180px;
+  height: 48px;
 
-  border: 3px solid #a99772;
-  background: #75674f;
-  color: #171511;
+  border: 4px solid #8c7556;
 
+  background: #544331;
+  color: #f5ead3;
+
+  font-family: monospace;
   font-weight: bold;
-  letter-spacing: 3px;
+
+  cursor: pointer;
 }
 
-#access-button:hover {
-  background: #c1aa7c;
+#login-button:hover {
+  background: #755e42;
 }
 
 #login-message {
-  min-height: 18px;
+  min-height: 22px;
   margin-top: 20px;
 
-  color: #938973;
-  font-size: 11px;
-  letter-spacing: 2px;
+  color: #d39b73;
 }
 
 
-/* =========================================================
-   GAME
-========================================================= */
+/* ==================================================
+   GAME SCREEN
+================================================== */
 
 #game-screen {
-  width: 100%;
+  display: none;
+
+  width: 100vw;
   min-height: 100vh;
 
-  padding: 30px 20px 50px;
+  background: #29231c;
 
-  background: #b9a383;
+  padding: 20px;
 }
 
-.game-wrapper {
-  width: min(1180px, 100%);
-  margin: 0 auto;
+.game-header {
+  width: min(1200px, 96vw);
+
+  margin: 0 auto 12px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color: #d9c5a3;
+  font-size: 13px;
+}
+
+.game-title {
+  letter-spacing: 3px;
 }
 
 
-/* =========================================================
+/* ==================================================
    ROOM
-========================================================= */
+================================================== */
 
 .room {
   position: relative;
 
-  width: 100%;
-  height: 680px;
+  width: min(1200px, 96vw);
+  height: min(700px, 78vh);
+
+  min-height: 560px;
+
+  margin: auto;
 
   overflow: hidden;
 
-  border: 8px solid #3b3126;
+  border: 8px solid #3b3025;
 
-  background: #cbbb9c;
+  background: #b7a181;
 
-  box-shadow: 12px 12px 0 rgba(40, 31, 22, 0.35);
+  box-shadow:
+    14px 14px 0 #17120d;
 }
 
 
-/* =========================================================
-   WALL
-========================================================= */
+/* WALL */
 
 .wall {
   position: absolute;
-  inset: 0 0 32% 0;
 
-  background: #cbbb9c;
+  left: 0;
+  top: 0;
 
-  border-bottom: 8px solid #8b7658;
+  width: 100%;
+  height: 66%;
 
-  z-index: 1;
+  background: #c9b58f;
+
+  border-bottom: 8px solid #826d50;
 }
 
 
-/* =========================================================
-   FLOOR
-========================================================= */
+/* pixel wall lines */
+
+.wall::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 35px;
+
+  width: 100%;
+  height: 4px;
+
+  background: #b9a37f;
+
+  box-shadow:
+    0 70px #b9a37f,
+    0 140px #b9a37f,
+    0 210px #b9a37f;
+}
+
+
+/* FLOOR */
 
 .floor {
   position: absolute;
+
   left: 0;
-  right: 0;
   bottom: 0;
 
-  height: 32%;
+  width: 100%;
+  height: 34%;
 
-  background: #a88c68;
+  background: #9b7957;
 
-  background-image:
-    repeating-linear-gradient(
-      0deg,
-      transparent 0,
-      transparent 28px,
-      rgba(70, 51, 34, 0.12) 29px,
-      rgba(70, 51, 34, 0.12) 32px
-    );
-
-  z-index: 2;
+  border-top: 8px solid #765a40;
 }
 
 
-/* =========================================================
+/* floor planks */
+
+.floor::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 25px;
+
+  width: 100%;
+  height: 5px;
+
+  background: #856647;
+
+  box-shadow:
+    0 55px #856647,
+    0 110px #856647,
+    0 165px #856647;
+}
+
+.floor::after {
+  content: "";
+
+  position: absolute;
+
+  left: 18%;
+  top: 0;
+
+  width: 5px;
+  height: 100%;
+
+  background: #856647;
+
+  box-shadow:
+    150px 0 #856647,
+    300px 0 #856647,
+    450px 0 #856647,
+    600px 0 #856647,
+    750px 0 #856647;
+}
+
+
+/* ==================================================
+   ALL CLICKABLE OBJECTS
+================================================== */
+
+.object-button {
+  appearance: none;
+  -webkit-appearance: none;
+
+  border: 0;
+  margin: 0;
+  padding: 0;
+
+  background: transparent;
+
+  color: inherit;
+
+  font: inherit;
+
+  display: block;
+
+  position: absolute;
+
+  cursor: pointer;
+
+  outline: none;
+
+  z-index: 50;
+}
+
+.object-button::before,
+.object-button::after {
+  content: none;
+}
+
+.object-button:hover {
+  filter: brightness(1.08);
+}
+
+.object-button:focus {
+  outline: none;
+}
+
+
+/* ==================================================
    WINDOW
-========================================================= */
+================================================== */
 
 .window-object {
   position: absolute;
 
-  left: 6%;
+  left: 7%;
   top: 8%;
 
-  width: 28%;
-  height: 35%;
+  width: 255px;
+  height: 205px;
 
-  z-index: 8;
+  z-index: 10;
 }
 
 .window-frame {
   position: absolute;
-  inset: 0;
 
-  border: 10px solid #5d4a35;
-  background: #e1d4b8;
+  width: 100%;
+  height: 100%;
 
-  box-shadow: 6px 6px 0 #80694c;
+  border: 14px solid #684d38;
+
+  background: #493a31;
+
+  box-shadow:
+    8px 8px 0 #493727;
 }
 
 .window-glass {
   position: absolute;
-  inset: 12px;
+
+  left: 14px;
+  top: 14px;
+
+  right: 14px;
+  bottom: 14px;
+
+  background: #65717a;
 
   overflow: hidden;
+}
 
-  background: #626b75;
-  border: 4px solid #403b35;
+.window-glass::after {
+  content: "";
+
+  position: absolute;
+
+  right: 25px;
+  bottom: 20px;
+
+  width: 100px;
+  height: 45px;
+
+  background: #4d5152;
+
+  box-shadow:
+    -40px 15px 0 #4d5152,
+    35px 10px 0 #4d5152;
 }
 
 .moon {
@@ -264,12 +391,13 @@ button {
   width: 42px;
   height: 42px;
 
-  right: 22px;
-  top: 18px;
+  right: 30px;
+  top: 28px;
 
-  background: #eee3c4;
+  background: #e8d7a8;
 
-  box-shadow: -8px 3px 0 #626b75;
+  box-shadow:
+    7px 0 0 #65717a;
 }
 
 .star {
@@ -278,1487 +406,1201 @@ button {
   width: 5px;
   height: 5px;
 
-  background: #f0dfb5;
+  background: #e8d7a8;
 }
 
-.star-one {
-  left: 20px;
-  top: 24px;
+.star1 {
+  left: 30px;
+  top: 25px;
 }
 
-.star-two {
-  left: 65px;
-  top: 55px;
+.star2 {
+  left: 80px;
+  top: 60px;
 }
 
-.star-three {
-  right: 45px;
-  top: 72px;
-}
-
-.cloud {
-  position: absolute;
-  height: 12px;
-  background: #aaa8a0;
-}
-
-.cloud-one {
-  left: 10px;
-  bottom: 38px;
-  width: 75px;
-}
-
-.cloud-two {
-  right: 10px;
-  bottom: 18px;
-  width: 55px;
+.star3 {
+  left: 145px;
+  top: 30px;
 }
 
 
-/* =========================================================
-   CURTAIN
-========================================================= */
+/* curtains */
 
-#curtain-transition {
-  position: absolute;
-  inset: 0;
-
-  overflow: hidden;
-
-  z-index: 100;
-
-  pointer-events: none;
-}
-
-.transition-left,
-.transition-right {
+.curtain {
   position: absolute;
 
-  top: 0;
-  bottom: 0;
+  top: -5px;
 
-  width: 55%;
+  width: 58px;
+  height: 180px;
 
-  background: #70493a;
+  background: #806047;
 
-  transition: transform 1.2s steps(8);
+  z-index: 10;
+
+  transition: transform 1s ease;
 }
 
-.transition-left {
-  left: 0;
+.left-curtain {
+  left: -5px;
 }
 
-.transition-right {
-  right: 0;
+.right-curtain {
+  right: -5px;
 }
 
-#curtain-transition.open .transition-left {
-  transform: translateX(-110%);
+.window-open .left-curtain {
+  transform: translateX(-75px);
 }
 
-#curtain-transition.open .transition-right {
-  transform: translateX(110%);
+.window-open .right-curtain {
+  transform: translateX(75px);
 }
 
 
-/* =========================================================
+/* ==================================================
    WALL PICTURE
-========================================================= */
+================================================== */
 
-.wall-picture {
-  position: absolute;
-
-  right: 7%;
+.picture-button {
+  left: 38%;
   top: 9%;
 
-  width: 90px;
-  height: 90px;
-
-  padding: 8px;
-
-  background: #644c37;
-
-  border: 4px solid #453526;
-
-  z-index: 5;
+  width: 125px;
+  height: 125px;
 }
 
-.wall-picture-inner {
+.picture-frame {
+  width: 110px;
+  height: 110px;
+
+  padding: 10px;
+
+  background: #624933;
+
+  border: 5px solid #4a3525;
+
+  box-shadow:
+    7px 7px 0 #73583d;
+}
+
+.picture-inner {
   width: 100%;
   height: 100%;
+
+  background: #ddd0b2;
+
+  color: #765f42;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  background: #dfcfac;
-  color: #7e6b50;
+  font-size: 40px;
 
-  font-size: 25px;
+  border: 4px solid #9b815d;
 }
 
 
-/* =========================================================
+/* ==================================================
    CLOCK
-========================================================= */
+================================================== */
 
-.wall-clock {
-  position: absolute;
+.clock-button {
+  left: 53%;
+  top: 11%;
 
-  left: 39%;
-  top: 8%;
+  width: 100px;
+  height: 100px;
+}
 
-  width: 72px;
-  height: 72px;
+.pixel-clock {
+  width: 88px;
+  height: 88px;
 
-  padding: 0;
+  background: #594638;
 
-  border: 0;
+  border: 6px solid #3c3026;
 
-  background: transparent;
+  padding: 8px;
 
-  z-index: 12;
+  box-shadow:
+    6px 6px 0 #796047;
 }
 
 .clock-face {
-  position: absolute;
-  inset: 0;
+  position: relative;
 
-  display: block;
+  width: 60px;
+  height: 60px;
 
-  border: 6px solid #594634;
+  margin: auto;
 
-  background: #eee5d2;
-}
+  border-radius: 0;
 
-.clock-number {
-  position: absolute;
+  background: #ead9ae;
 
-  color: #4c4033;
-
-  font-size: 7px;
-  font-weight: bold;
-}
-
-.twelve {
-  top: 5px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.three {
-  right: 5px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.six {
-  bottom: 4px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.nine {
-  left: 4px;
-  top: 50%;
-  transform: translateY(-50%);
+  border: 4px solid #513d2c;
 }
 
 .clock-hand {
   position: absolute;
 
   left: 50%;
-  bottom: 50%;
+  top: 50%;
 
-  width: 3px;
+  width: 4px;
 
-  transform-origin: bottom;
+  background: #3b3026;
 
-  background: #433528;
+  transform-origin: center bottom;
 }
 
-.clock-hand.hour {
-  height: 25%;
-  transform: rotate(302deg);
+.hour-hand {
+  height: 18px;
+  transform: translate(-2px, -18px) rotate(5deg);
 }
 
-.clock-hand.minute {
-  height: 37%;
-  transform: rotate(60deg);
+.minute-hand {
+  height: 23px;
+  transform: translate(-2px, -23px) rotate(30deg);
 }
 
-
-/* =========================================================
-   WARDROBE
-========================================================= */
-
-.wardrobe-object {
+.clock-center {
   position: absolute;
 
-  left: 51%;
-  top: 16%;
+  width: 7px;
+  height: 7px;
 
-  width: 190px;
-  height: 290px;
+  left: 50%;
+  top: 50%;
 
-  padding: 0;
+  transform: translate(-50%, -50%);
 
-  transform: translateX(-50%);
+  background: #3b3026;
+}
 
-  border: 8px solid #493525;
+.clock-time {
+  position: absolute;
 
-  background: #75543a;
+  left: 2px;
+  bottom: -27px;
 
-  z-index: 10;
+  width: 75px;
+
+  text-align: center;
+
+  font-size: 11px;
+
+  color: #3b3026;
+
+  background: #ead9ae;
+
+  padding: 3px;
+}
+
+
+/* ==================================================
+   WARDROBE
+================================================== */
+
+.wardrobe-button {
+  right: 5%;
+  top: 9%;
+
+  width: 225px;
+  height: 330px;
+}
+
+.wardrobe {
+  position: relative;
+
+  width: 205px;
+  height: 310px;
+
+  background: #684d38;
+
+  border: 8px solid #493627;
+
+  box-shadow:
+    10px 10px 0 #76593e;
 }
 
 .wardrobe-top {
   position: absolute;
 
   left: -8px;
-  right: -8px;
   top: -18px;
 
-  height: 18px;
+  width: 205px;
+  height: 15px;
 
-  background: #503a28;
+  background: #493627;
 }
 
 .wardrobe-door {
   position: absolute;
 
-  top: 25px;
-  bottom: 18px;
+  top: 12px;
 
-  width: 45%;
+  width: 85px;
+  height: 265px;
 
-  background: #876548;
+  background: #795b40;
 
-  border: 4px solid #543e2d;
+  border: 6px solid #503a29;
 }
 
 .left-door {
-  left: 3%;
+  left: 10px;
 }
 
 .right-door {
-  right: 3%;
+  right: 10px;
 }
 
-.door-handle {
+.wardrobe-door span {
   position: absolute;
 
-  top: 50%;
+  top: 125px;
 
   width: 8px;
-  height: 8px;
+  height: 22px;
 
-  background: #33261c;
+  background: #d3b27d;
 }
 
-.left-door .door-handle {
-  right: 8%;
-}
-
-.right-door .door-handle {
-  left: 8%;
-}
-
-.wardrobe-clothes {
-  position: absolute;
-
-  left: 23%;
-  right: 23%;
-  top: 65px;
-
-  height: 130px;
-
-  background: #342c26;
-
-  opacity: 0;
-
-  transition: opacity 0.2s steps(2);
-}
-
-.wardrobe-object:hover .wardrobe-clothes {
-  opacity: 1;
-}
-
-.shirt {
-  position: absolute;
-
-  top: 12%;
-
-  width: 22%;
-  height: 60%;
-
-  border: 2px solid #191614;
-}
-
-.shirt.black {
-  background: #201d1a;
-}
-
-.shirt.white {
-  left: 38%;
-  background: #e5dfd0;
-}
-
-.shirt:nth-child(1) {
-  left: 8%;
-}
-
-.shirt:nth-child(3) {
-  right: 8%;
-}
-
-
-/* =========================================================
-   DESK
-========================================================= */
-
-.desk-object {
-  position: absolute;
-
-  left: 7%;
-  bottom: 24%;
-
-  width: 40%;
-  height: 210px;
-
-  z-index: 25;
-}
-
-
-/* 桌面 */
-.desk-top {
-  position: absolute;
-
-  left: 0;
-  right: 0;
-  top: 0;
-
-  height: 70px;
-
-  border: 7px solid #4f3928;
-
-  background: #805e3f;
-
-  box-shadow: 6px 6px 0 #59402b;
-}
-
-
-/* 抽屜 */
-.desk-drawer {
-  position: absolute;
-
-  left: 20%;
-  top: 70px;
-
-  width: 60%;
-  height: 85px;
-
-  border: 6px solid #4f3928;
-
-  background: #765437;
-}
-
-.drawer-handle {
-  position: absolute;
-
-  left: 50%;
-  top: 50%;
-
-  width: 30px;
-  height: 8px;
-
-  transform: translate(-50%, -50%);
-
-  background: #39291d;
-}
-
-
-/* 桌腳 */
-.desk-leg {
-  position: absolute;
-
-  bottom: -75px;
-
-  width: 20px;
-  height: 80px;
-
-  background: #4d3928;
-}
-
-.desk-leg.left {
-  left: 20px;
-}
-
-.desk-leg.right {
-  right: 20px;
-}
-
-
-/* =========================================================
-   DIARY
-========================================================= */
-
-.diary-object {
-  position: absolute;
-
-  left: 7%;
-  top: -58px;
-
-  width: 75px;
-  height: 58px;
-
-  padding: 0;
-
-  border: 0;
-
-  background: transparent;
-
-  z-index: 40;
-}
-
-.diary-cover {
-  position: absolute;
-  inset: 0;
-
-  display: block;
-
-  border: 4px solid #5b5040;
-  background: #eee5d0;
-
-  box-shadow: 4px 4px 0 #4d392b;
-}
-
-.diary-pages {
-  position: absolute;
-
-  left: 8px;
-  top: 8px;
-
-  width: 59px;
-  height: 38px;
-
-  border-left: 3px solid #c6bda9;
-  border-right: 3px solid #c6bda9;
-}
-
-.object-label {
-  position: absolute;
-
-  left: 0;
-  right: 0;
-  bottom: -15px;
-
-  color: #eee2c9;
-
-  font-size: 8px;
-  letter-spacing: 1px;
-}
-
-
-/* =========================================================
-   CAKE
-========================================================= */
-
-.cake-object {
-  position: absolute;
-
-  left: 39%;
-  top: -55px;
-
-  width: 90px;
-  height: 55px;
-
-  padding: 0;
-
-  border: 0;
-
-  background: transparent;
-
-  z-index: 40;
-}
-
-.cake-base {
-  position: absolute;
-
-  left: 5px;
-  right: 5px;
-  bottom: 3px;
-
-  height: 32px;
-
-  display: block;
-
-  background: #4b2d22;
-
-  border: 4px solid #39221b;
-}
-
-.cake-cream {
-  position: absolute;
-
-  left: 7px;
+.left-door span {
   right: 7px;
-  bottom: 30px;
-
-  height: 12px;
-
-  display: block;
-
-  background: #e6d5b5;
-
-  border: 3px solid #b9a27e;
 }
 
-.cake-chocolate {
-  position: absolute;
-
-  left: 20px;
-  right: 20px;
-  top: 10px;
-
-  height: 8px;
-
-  display: block;
-
-  background: #5b3425;
+.right-door span {
+  left: 7px;
 }
 
-.cake-candle {
+.wardrobe-feet {
   position: absolute;
 
-  left: 50%;
-  top: -2px;
-
-  width: 6px;
-  height: 18px;
-
-  display: block;
-
-  transform: translateX(-50%);
-
-  background: #eee0bd;
-}
-
-
-/* =========================================================
-   SPEAKER
-========================================================= */
-
-.speaker-object {
-  position: absolute;
-
-  right: 5%;
-  top: -62px;
-
-  width: 58px;
-  height: 62px;
-
-  padding: 0;
-
-  border: 0;
-
-  background: transparent;
-
-  z-index: 40;
-}
-
-.speaker-body {
-  position: absolute;
-  inset: 0;
-
-  display: block;
-
-  border: 5px solid #332c25;
-  background: #51483e;
-}
-
-.speaker-circle {
-  position: absolute;
-
-  left: 50%;
-  top: 38%;
+  bottom: -18px;
+  left: 12px;
 
   width: 28px;
-  height: 28px;
+  height: 18px;
 
-  transform: translate(-50%, -50%);
+  background: #493627;
 
-  border: 5px solid #28221d;
-  background: #877764;
-}
-
-.speaker-circle.small {
-  top: 75%;
-
-  width: 14px;
-  height: 14px;
+  box-shadow:
+    145px 0 #493627;
 }
 
 
-/* =========================================================
-   LAMP
-========================================================= */
-
-.lamp-object {
-  position: absolute;
-
-  right: 12%;
-  top: 30%;
-
-  width: 85px;
-  height: 135px;
-
-  padding: 0;
-
-  border: 0;
-
-  background: transparent;
-
-  z-index: 14;
-}
-
-.lamp-shade {
-  position: absolute;
-
-  left: 8px;
-  top: 0;
-
-  width: 69px;
-  height: 42px;
-
-  display: block;
-
-  background: #e1cfaa;
-
-  border: 5px solid #765f45;
-}
-
-.lamp-pole {
-  position: absolute;
-
-  left: 50%;
-  top: 38%;
-
-  width: 6px;
-  height: 45px;
-
-  transform: translateX(-50%);
-
-  background: #66503b;
-}
-
-.lamp-base {
-  position: absolute;
-
-  left: 18px;
-  bottom: 0;
-
-  width: 50px;
-  height: 14px;
-
-  background: #594331;
-}
-
-
-/* =========================================================
+/* ==================================================
    BED
-========================================================= */
+================================================== */
 
-.bed-object {
-  position: absolute;
+.bed-button {
+  left: 4%;
+  bottom: 8%;
 
-  right: 5%;
-  bottom: 20%;
-
-  width: 47%;
-  height: 245px;
-
-  z-index: 20;
+  width: 400px;
+  height: 250px;
 }
 
-.bed-headboard {
-  position: absolute;
+.bed {
+  position: relative;
 
-  left: 0;
-  right: 0;
-  top: 0;
-
-  height: 70px;
-
-  background: #644a34;
-
-  border: 7px solid #453324;
+  width: 385px;
+  height: 210px;
 }
 
 .pillow {
   position: absolute;
 
-  left: 8%;
-  top: 53px;
+  left: 20px;
+  top: 15px;
 
-  width: 30%;
-  height: 52px;
+  width: 125px;
+  height: 65px;
 
-  background: #e7ddc8;
+  background: #e8dfc9;
 
-  border: 4px solid #a9997e;
+  border: 6px solid #9a8467;
 
-  z-index: 2;
+  box-shadow:
+    5px 5px 0 #7d654a;
 }
 
 .blanket {
   position: absolute;
 
-  left: 0;
-  right: 0;
-  bottom: 20px;
+  left: 20px;
+  top: 65px;
 
-  height: 145px;
+  width: 345px;
+  height: 105px;
 
-  background: #b3a28a;
+  background: #68706b;
 
-  border: 7px solid #594532;
+  border: 8px solid #574f43;
 }
 
 .blanket-pattern {
   position: absolute;
 
-  width: 18px;
-  height: 18px;
+  width: 100%;
+  height: 100%;
 
-  background: #897963;
-}
-
-.blanket-pattern.one {
-  left: 20%;
-  top: 20%;
-}
-
-.blanket-pattern.two {
-  left: 48%;
-  top: 48%;
-}
-
-.blanket-pattern.three {
-  right: 18%;
-  top: 25%;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 20px,
+      #7e8378 20px,
+      #7e8378 24px
+    );
 }
 
 .bed-frame {
   position: absolute;
 
-  left: -2%;
-  right: -2%;
+  left: 10px;
+  bottom: 20px;
+
+  width: 365px;
+  height: 22px;
+
+  background: #614631;
+
+  border: 5px solid #493426;
+}
+
+.bed-leg {
+  position: absolute;
+
   bottom: 0;
 
-  height: 28px;
+  width: 25px;
+  height: 35px;
 
-  background: #503b2a;
+  background: #493426;
+}
 
-  border: 5px solid #392a1f;
+.leg-left {
+  left: 30px;
+}
+
+.leg-right {
+  right: 30px;
 }
 
 
-/* =========================================================
-   DOG
-========================================================= */
+/* ==================================================
+   RUG
+================================================== */
 
-.dog-object {
+.rug-button {
+  left: 38%;
+  bottom: 5%;
+
+  width: 330px;
+  height: 130px;
+}
+
+.rug {
+  width: 320px;
+  height: 115px;
+
+  background: #826951;
+
+  border: 7px solid #604936;
+
+  box-shadow:
+    7px 7px 0 #604936;
+}
+
+.rug-pattern {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #bda783;
+
+  font-size: 20px;
+}
+
+
+/* ==================================================
+   DESK
+================================================== */
+
+.desk-object {
   position: absolute;
 
-  right: 18%;
-  bottom: 47%;
+  right: 25%;
 
-  width: 100px;
-  height: 105px;
+  bottom: 11%;
 
-  padding: 0;
+  width: 285px;
+  height: 245px;
 
-  border: 0;
+  z-index: 20;
+}
 
-  background: transparent;
+.desk-top {
+  position: absolute;
 
-  z-index: 45;
+  left: 0;
+  top: 30px;
+
+  width: 285px;
+  height: 48px;
+
+  background: #684a34;
+
+  border: 7px solid #493425;
+
+  box-shadow:
+    8px 8px 0 #493425;
+}
+
+.desk-surface {
+  position: absolute;
+
+  left: 8px;
+  top: 8px;
+
+  width: 255px;
+  height: 22px;
+
+  background: #8a6648;
+}
+
+.desk-drawer {
+  position: absolute;
+
+  left: 35px;
+  top: 78px;
+
+  width: 215px;
+  height: 80px;
+
+  background: #715238;
+
+  border: 7px solid #4b3525;
+}
+
+.drawer-handle {
+  position: absolute;
+
+  left: 95px;
+  top: 28px;
+
+  width: 25px;
+  height: 8px;
+
+  background: #c0a06e;
+}
+
+.desk-leg {
+  position: absolute;
+
+  top: 158px;
+
+  width: 25px;
+  height: 80px;
+
+  background: #4b3525;
+}
+
+.desk-leg-left {
+  left: 35px;
+}
+
+.desk-leg-right {
+  right: 35px;
+}
+
+
+/* ==================================================
+   DIARY
+================================================== */
+
+.diary-button {
+  left: 45px;
+  top: -55px;
+
+  width: 95px;
+  height: 65px;
+
+  z-index: 70;
+}
+
+.diary {
+  position: relative;
+
+  width: 90px;
+  height: 58px;
+
+  transform: rotate(-4deg);
+}
+
+.diary-cover {
+  width: 90px;
+  height: 58px;
+
+  background: #47382d;
+
+  border: 5px solid #2f261f;
+
+  color: #d9c39a;
+
+  font-size: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.diary-page {
+  position: absolute;
+
+  left: 45px;
+  top: 5px;
+
+  width: 3px;
+  height: 45px;
+
+  background: #c7ad80;
+}
+
+
+/* ==================================================
+   CAKE
+================================================== */
+
+.cake-button {
+  left: 145px;
+  top: -65px;
+
+  width: 85px;
+  height: 75px;
+
+  z-index: 70;
+}
+
+.cake {
+  position: relative;
+
+  width: 75px;
+  height: 70px;
+}
+
+.cake-top {
+  position: absolute;
+
+  left: 10px;
+  top: 4px;
+
+  width: 55px;
+  height: 20px;
+
+  background: #c7a37b;
+
+  border: 5px solid #4c3525;
+}
+
+.cake-top span {
+  display: inline-block;
+
+  width: 6px;
+  height: 8px;
+
+  margin-left: 5px;
+
+  background: #f1dfad;
+}
+
+.cake-body {
+  position: absolute;
+
+  left: 12px;
+  top: 20px;
+
+  width: 51px;
+  height: 30px;
+
+  background: #8e6549;
+
+  border: 5px solid #4c3525;
+}
+
+.cake-plate {
+  position: absolute;
+
+  left: 3px;
+  bottom: 3px;
+
+  width: 68px;
+  height: 8px;
+
+  background: #d1b98d;
+
+  border: 4px solid #4c3525;
+}
+
+
+/* ==================================================
+   SPEAKER
+================================================== */
+
+.speaker-button {
+  right: 12px;
+  top: -65px;
+
+  width: 70px;
+  height: 75px;
+
+  z-index: 70;
+}
+
+.speaker {
+  width: 62px;
+  height: 68px;
+
+  background: #3f3730;
+
+  border: 5px solid #28221d;
+}
+
+.speaker-top {
+  width: 100%;
+  height: 8px;
+
+  background: #625449;
+}
+
+.speaker-body {
+  position: relative;
+
+  width: 100%;
+  height: 55px;
+}
+
+.speaker-circle {
+  position: absolute;
+
+  left: 12px;
+  top: 8px;
+
+  width: 32px;
+  height: 32px;
+
+  background: #24201c;
+
+  border: 5px solid #75675a;
+}
+
+.speaker-circle.small {
+  left: 22px;
+  top: 42px;
+
+  width: 12px;
+  height: 12px;
+
+  border: 3px solid #75675a;
+}
+
+
+/* ==================================================
+   DOG
+================================================== */
+
+.dog-button {
+  right: 5%;
+  bottom: 5%;
+
+  width: 170px;
+  height: 170px;
+
+  z-index: 80;
+}
+
+.dog {
+  position: relative;
+
+  width: 160px;
+  height: 160px;
 }
 
 .dog-head {
   position: absolute;
 
-  left: 18px;
-  top: 8px;
+  left: 45px;
+  top: 20px;
 
-  width: 64px;
-  height: 57px;
+  width: 85px;
+  height: 75px;
 
-  background: #c6a879;
+  background: #c48d5d;
 
-  border: 5px solid #765b3d;
-
-  z-index: 2;
+  border: 7px solid #593e2b;
 }
 
 .dog-ear {
   position: absolute;
 
-  top: 7px;
+  top: 25px;
 
-  width: 30px;
-  height: 40px;
+  width: 40px;
+  height: 55px;
 
-  background: #9b794f;
+  background: #805536;
+
+  border: 6px solid #593e2b;
 
   z-index: 1;
 }
 
-.dog-ear.left {
-  left: 7px;
+.left-ear {
+  left: 27px;
+
+  transform: rotate(15deg);
 }
 
-.dog-ear.right {
-  right: 7px;
+.right-ear {
+  right: 27px;
+
+  transform: rotate(-15deg);
 }
 
 .dog-eye {
   position: absolute;
 
-  top: 20px;
+  top: 24px;
 
-  width: 6px;
-  height: 6px;
+  width: 9px;
+  height: 9px;
 
-  background: #30251d;
+  background: #251d18;
 }
 
-.dog-eye.left {
-  left: 16px;
+.left-eye {
+  left: 18px;
 }
 
-.dog-eye.right {
-  right: 16px;
+.right-eye {
+  right: 18px;
+}
+
+.dog-muzzle {
+  position: absolute;
+
+  left: 24px;
+  top: 42px;
+
+  width: 37px;
+  height: 23px;
+
+  background: #e2b982;
+
+  border: 4px solid #593e2b;
 }
 
 .dog-nose {
   position: absolute;
 
-  left: 50%;
-  top: 33px;
+  left: 35px;
+  top: 45px;
 
-  width: 10px;
-  height: 8px;
+  width: 15px;
+  height: 10px;
 
-  transform: translateX(-50%);
-
-  background: #39261c;
+  background: #251d18;
 }
 
 .dog-body {
   position: absolute;
 
-  left: 25px;
-  bottom: 2px;
+  left: 30px;
+  bottom: 5px;
 
-  width: 50px;
-  height: 45px;
+  width: 110px;
+  height: 70px;
 
-  background: #b99562;
+  background: #b97f50;
 
-  border: 5px solid #765b3d;
+  border: 7px solid #593e2b;
 }
 
-
-/* =========================================================
-   PHOTO FRAME
-========================================================= */
-
-.picture-frame-object {
+.dog-paw {
   position: absolute;
 
-  right: 20%;
-  top: 10%;
-
-  width: 105px;
-  height: 105px;
-
-  padding: 0;
-
-  border: 0;
-
-  background: transparent;
-
-  z-index: 13;
-}
-
-.frame-border {
-  position: absolute;
-  inset: 0;
-
-  padding: 8px;
-
-  background: #63482f;
-
-  border: 4px solid #453222;
-}
-
-.frame-photo {
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  background: #d9d0bc;
-
-  color: #776b58;
-
-  font-size: 9px;
-}
-
-
-/* =========================================================
-   RUG
-========================================================= */
-
-.rug-object {
-  position: absolute;
-
-  left: 30%;
-  bottom: 4%;
-
-  width: 40%;
-  height: 100px;
-
-  padding: 0;
-
-  border: 0;
-
-  background: transparent;
-
-  z-index: 6;
-}
-
-.rug-pattern {
-  position: absolute;
-  inset: 0;
-
-  display: block;
-
-  border: 8px solid #785f4b;
-
-  background: #9d8065;
-
-  box-shadow:
-    inset 0 0 0 5px #b59a7c;
-}
-
-
-/* =========================================================
-   DRAWER LOCK
-========================================================= */
-
-.drawer-lock {
-  position: absolute;
-
-  left: 21%;
-  bottom: 31%;
+  bottom: 0;
 
   width: 30px;
-  height: 30px;
+  height: 42px;
 
-  border: 4px solid #3b2b20;
+  background: #c48d5d;
 
-  background: #665039;
-
-  z-index: 35;
+  border: 6px solid #593e2b;
 }
 
-.lock-dot {
+.left-paw {
+  left: 38px;
+}
+
+.right-paw {
+  right: 38px;
+}
+
+
+/* ==================================================
+   LAMP
+================================================== */
+
+.lamp-object {
   position: absolute;
 
-  left: 50%;
-  top: 50%;
+  left: 31%;
 
-  width: 8px;
-  height: 8px;
+  bottom: 13%;
 
-  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 180px;
 
-  background: #d0ad69;
+  z-index: 30;
+}
+
+.lamp-shade {
+  position: absolute;
+
+  left: 5px;
+  top: 0;
+
+  width: 70px;
+  height: 55px;
+
+  background: #d4b77e;
+
+  border: 7px solid #5a4430;
+}
+
+.lamp-pole {
+  position: absolute;
+
+  left: 35px;
+  top: 55px;
+
+  width: 10px;
+  height: 95px;
+
+  background: #5a4430;
+}
+
+.lamp-base {
+  position: absolute;
+
+  left: 15px;
+  bottom: 0;
+
+  width: 50px;
+  height: 12px;
+
+  background: #4d3929;
 }
 
 
-/* =========================================================
+/* ==================================================
+   ROOM LABEL
+================================================== */
+
+.room-label {
+  position: absolute;
+
+  left: 20px;
+  bottom: 15px;
+
+  z-index: 100;
+
+  color: #e1cfaa;
+
+  font-size: 11px;
+
+  background: #604a37;
+
+  border: 3px solid #493728;
+
+  padding: 5px 8px;
+}
+
+
+/* ==================================================
    ROOM MESSAGE
-========================================================= */
+================================================== */
 
 #room-message {
   position: absolute;
 
   left: 50%;
-  bottom: 7%;
+  top: 50%;
 
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
 
-  max-width: 70%;
+  z-index: 200;
 
-  padding: 12px 18px;
+  min-width: 200px;
 
-  border: 4px solid #594936;
+  padding: 15px 20px;
 
-  background: #252019;
+  background: #2d241c;
 
-  color: #f1e5cc;
+  border: 5px solid #a98a61;
 
-  font-size: 12px;
+  color: #f1dfbc;
 
   text-align: center;
 
-  opacity: 0;
-
-  pointer-events: none;
-
-  transition: opacity 0.2s steps(2);
-
-  z-index: 200;
-}
-
-#room-message.show {
-  opacity: 1;
+  display: none;
 }
 
 
-/* =========================================================
-   ROOM TITLE
-========================================================= */
+/* ==================================================
+   MODAL
+================================================== */
 
-.room-title {
-  position: absolute;
-
-  left: 18px;
-  bottom: 12px;
-
-  color: rgba(238, 226, 201, 0.55);
-
-  font-size: 9px;
-  letter-spacing: 2px;
-
-  z-index: 150;
-}
-
-
-/* =========================================================
-   OBJECT BUTTON RESET
-========================================================= */
-
-.object-button {
-  appearance: none;
-  -webkit-appearance: none;
-
-  outline: none;
-
-  font-size: inherit;
-}
-
-.object-button:hover {
-  filter: brightness(1.08);
-}
-
-
-/* =========================================================
-   HUD
-========================================================= */
-
-.game-hud {
-  margin-top: 18px;
-
-  padding: 14px 18px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 15px;
-
-  border: 4px solid #66533e;
-
-  background: #2a241d;
-
-  box-shadow: 6px 6px 0 rgba(50, 38, 27, 0.35);
-}
-
-.hud-left {
-  display: flex;
-  align-items: center;
-  gap: 25px;
-}
-
-.hud-title {
-  color: #eadbbd;
-  font-size: 12px;
-  letter-spacing: 2px;
-}
-
-#progress-text {
-  color: #a99a7c;
-  font-size: 11px;
-}
-
-#restart-button {
-  border: 3px solid #887456;
-
-  padding: 8px 12px;
-
-  background: #4d3e30;
-  color: #eee2c9;
-
-  font-size: 10px;
-}
-
-#restart-button:hover {
-  background: #6b5540;
-}
-
-
-/* =========================================================
-   MODALS
-========================================================= */
-
-.modal {
+#modal {
   position: fixed;
-  inset: 0;
 
-  z-index: 1000;
+  left: 0;
+  top: 0;
 
-  display: flex;
+  width: 100vw;
+  height: 100vh;
+
+  z-index: 500;
+
+  display: none;
+
   align-items: center;
   justify-content: center;
 
-  padding: 20px;
-
-  background: rgba(20, 17, 13, 0.82);
+  background: rgba(20, 15, 10, 0.78);
 }
 
 .modal-box {
   position: relative;
 
-  width: min(470px, 92vw);
-  max-height: 90vh;
+  width: 480px;
+  max-width: 90vw;
 
-  overflow-y: auto;
+  min-height: 250px;
 
-  padding: 35px;
+  padding: 45px;
 
-  border: 5px solid #806b50;
+  background: #d7c19a;
 
-  background: #29231c;
-  color: #eee2c9;
+  border: 8px solid #4c3929;
 
-  text-align: center;
+  color: #3c2e22;
 
-  box-shadow: 10px 10px 0 #14110e;
+  box-shadow:
+    12px 12px 0 #1e1711;
 }
 
-.modal-close {
+#modal-close {
   position: absolute;
 
   right: 12px;
-  top: 10px;
-
-  width: 35px;
-  height: 35px;
+  top: 8px;
 
   border: 0;
 
   background: transparent;
-  color: #c5b395;
+
+  color: #4c3929;
 
   font-size: 28px;
+
+  cursor: pointer;
 }
 
-.modal-label {
-  margin-bottom: 15px;
-
-  color: #a99570;
-
-  font-size: 10px;
-  letter-spacing: 3px;
-}
-
-.modal-box h2 {
-  margin: 0 0 20px;
-
-  color: #f2e5ca;
-
-  font-size: 23px;
-}
-
-.modal-box p {
-  color: #c4b79f;
-
-  line-height: 1.8;
-
-  font-size: 13px;
-}
-
-.small-text {
-  font-size: 10px !important;
-  color: #93866f !important;
-}
-
-.clue {
-  margin: 20px 0;
-  padding: 16px;
-
-  border: 3px dashed #806b50;
-
-  background: #1d1915;
-  color: #ead9b6;
-
-  line-height: 1.8;
-}
-
-.modal-button {
-  margin-top: 15px;
-
-  padding: 12px 18px;
-
-  border: 3px solid #a18b69;
-
-  background: #756149;
-  color: #17130f;
-
+#modal-title {
+  font-size: 21px;
   font-weight: bold;
-  font-size: 11px;
-  letter-spacing: 1px;
+
+  margin-bottom: 20px;
 }
 
-.modal-button:hover {
-  background: #b19b77;
+#modal-content {
+  line-height: 1.8;
+
+  white-space: pre-line;
 }
 
-#drawer-input {
-  width: 100%;
+#modal-input-area {
+  margin-top: 20px;
+}
 
-  margin-top: 10px;
+#modal-input-area input {
+  width: 150px;
+  height: 42px;
 
-  padding: 13px;
+  border: 4px solid #69513a;
 
-  border: 3px solid #79664c;
+  background: #f0dfbb;
 
-  background: #171411;
-  color: #eee2c9;
+  font-family: monospace;
 
   text-align: center;
 
-  outline: none;
-
-  letter-spacing: 4px;
+  font-size: 18px;
 }
 
-#drawer-input:focus {
-  border-color: #c1aa7c;
+#modal-action {
+  margin-top: 25px;
+
+  width: 150px;
+  height: 45px;
+
+  border: 4px solid #4d3928;
+
+  background: #765a3e;
+
+  color: #f5ead3;
+
+  font-family: monospace;
+
+  cursor: pointer;
 }
 
-#drawer-message {
-  min-height: 20px;
-}
 
+/* ==================================================
+   FINAL SCREEN
+================================================== */
 
-/* =========================================================
-   PHOTO
-========================================================= */
+#final-screen {
+  position: fixed;
 
-.photo-placeholder {
-  width: min(260px, 80%);
-  aspect-ratio: 4 / 3;
+  inset: 0;
 
-  margin: 20px auto;
+  z-index: 1000;
 
-  display: flex;
+  display: none;
+
   align-items: center;
   justify-content: center;
 
-  border: 6px solid #6b5540;
-
-  background: #b7aa92;
-
-  color: #625645;
-
-  font-size: 11px;
-  letter-spacing: 2px;
+  background: #17120e;
 }
-
-
-/* =========================================================
-   FINAL
-========================================================= */
 
 .final-box {
-  padding: 45px 30px;
-}
+  width: 600px;
+  max-width: 90vw;
 
-.final-stars {
-  margin-bottom: 20px;
+  padding: 55px;
 
-  color: #cdb58a;
+  text-align: center;
 
-  font-size: 20px;
-}
+  background: #d7c19a;
 
-.final-box h2 {
-  font-size: 32px;
-  margin-bottom: 5px;
+  color: #453326;
+
+  border: 8px solid #513c2b;
+
+  box-shadow:
+    15px 15px 0 #080604;
 }
 
 .final-cake {
-  position: relative;
+  font-size: 65px;
 
-  width: 130px;
-  height: 100px;
-
-  margin: 25px auto;
+  margin-bottom: 20px;
 }
 
-.final-cake-body {
-  position: absolute;
+.final-title {
+  font-size: 30px;
 
-  left: 10px;
-  right: 10px;
-  bottom: 10px;
+  letter-spacing: 4px;
 
-  height: 55px;
-
-  background: #573426;
-
-  border: 5px solid #39241b;
+  margin-bottom: 20px;
 }
 
-.final-cake-top {
-  position: absolute;
+.final-name {
+  font-size: 20px;
 
-  left: 10px;
-  right: 10px;
-  bottom: 55px;
-
-  height: 20px;
-
-  background: #e0c9a0;
-
-  border: 4px solid #8e7353;
-}
-
-.final-flame {
-  position: absolute;
-
-  left: 50%;
-  top: 2px;
-
-  width: 10px;
-  height: 28px;
-
-  transform: translateX(-50%);
-
-  background: #d6b06e;
-
-  border: 3px solid #745533;
+  margin-bottom: 30px;
 }
 
 .final-letter {
-  color: #d4c5aa !important;
-  line-height: 2 !important;
+  line-height: 2;
 }
 
 
-/* =========================================================
-   RESPONSIVE
-========================================================= */
+/* ==================================================
+   MOBILE
+================================================== */
 
-@media (max-width: 850px) {
+@media (max-width: 800px) {
 
   #game-screen {
-    padding: 12px;
+    padding: 10px;
+  }
+
+  .game-header {
+    width: 96vw;
+    font-size: 10px;
   }
 
   .room {
-    height: 620px;
-  }
-
-  .wardrobe-object {
-    width: 150px;
-    height: 240px;
-  }
-
-  .desk-object {
-    width: 43%;
-  }
-
-  .bed-object {
-    width: 50%;
-  }
-
-  .picture-frame-object {
-    right: 17%;
-  }
-}
-
-
-@media (max-width: 600px) {
-
-  .login-box {
-    padding: 35px 20px;
-  }
-
-  .room {
-    height: 560px;
+    width: 96vw;
+    height: 680px;
+    min-height: 680px;
   }
 
   .window-object {
     left: 4%;
-    width: 32%;
+    transform: scale(0.8);
+    transform-origin: top left;
   }
 
-  .wardrobe-object {
-    left: 53%;
-    width: 125px;
-    height: 210px;
+  .wardrobe-button {
+    right: -2%;
+    transform: scale(0.75);
+    transform-origin: top right;
+  }
+
+  .bed-button {
+    left: -7%;
+    transform: scale(0.75);
+    transform-origin: bottom left;
   }
 
   .desk-object {
-    left: 5%;
-    width: 47%;
+    right: 19%;
+    transform: scale(0.75);
+    transform-origin: bottom right;
   }
 
-  .bed-object {
-    right: 3%;
-    width: 54%;
+  .dog-button {
+    right: -3%;
+    transform: scale(0.7);
+    transform-origin: bottom right;
   }
 
-  .dog-object {
-    right: 14%;
+  .rug-button {
+    left: 30%;
+    transform: scale(0.75);
+    transform-origin: bottom center;
   }
 
-  .game-hud {
-    flex-direction: column;
-    align-items: stretch;
+  .lamp-object {
+    left: 25%;
+    transform: scale(0.75);
+    transform-origin: bottom center;
   }
 
-  .hud-left {
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-  }
-
-  #restart-button {
-    width: 100%;
-  }
-
-  .modal-box {
-    padding: 28px 20px;
-  }
 }
