@@ -1,9 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+  >
 
   <title>Birthday Adventure</title>
 
@@ -12,673 +15,634 @@
 
 <body>
 
-  <!-- =========================
-       LOGIN
-  ========================== -->
+  <!-- =====================================================
+       登入畫面
+       ===================================================== -->
 
-  <section id="login-screen" class="screen">
+  <section id="login-screen" class="screen login-screen">
 
     <div class="login-box">
 
-      <div class="terminal-text">
-        身分確認中，檢測
+      <div class="login-small-text">
+        SYSTEM
       </div>
+
+      <h1>身分確認中，檢測</h1>
 
       <div class="loading-line">
         <span></span>
       </div>
 
-      <p class="login-question">
-        ENTER ACCESS CODE
+      <p class="login-description">
+        請輸入通行密碼
       </p>
 
-      <input
-        id="password-input"
-        type="password"
-        maxlength="4"
-        inputmode="numeric"
-        autocomplete="off"
-        placeholder="••••"
-      >
+      <form id="password-form" autocomplete="off">
 
-      <button id="login-button">
-        ENTER
-      </button>
+        <label for="password-input" class="visually-hidden">
+          通行密碼
+        </label>
 
-      <p id="login-message"></p>
+        <input
+          id="password-input"
+          type="password"
+          inputmode="numeric"
+          maxlength="4"
+          autocomplete="off"
+          placeholder="----"
+          aria-label="通行密碼"
+        >
+
+        <button type="submit" id="access-button">
+          ENTER
+        </button>
+
+      </form>
+
+      <p id="login-message" class="login-message"></p>
 
     </div>
 
   </section>
 
 
-  <!-- =========================
-       GAME
-  ========================== -->
+  <!-- =====================================================
+       遊戲畫面
+       ===================================================== -->
 
-  <main id="game" class="game hidden">
+  <main id="game-screen" class="game-screen hidden">
 
-    <!-- ROOM -->
+    <div class="game-wrapper">
 
-    <div class="room">
+      <!-- 上方小提示 -->
+      <div class="game-top">
 
-      <!-- BACK WALL -->
+        <div class="game-title">
+          BIRTHDAY ROOM
+        </div>
 
-      <div class="back-wall">
-
-        <!-- WINDOW -->
-
-        <button
-          id="window"
-          class="object window-object"
-          aria-label="窗戶"
-        >
-
-          <span class="window-frame"></span>
-
-          <span class="window-glass">
-            <span class="cloud cloud-1"></span>
-            <span class="cloud cloud-2"></span>
-            <span class="sun-pixel"></span>
-          </span>
-
-        </button>
-
-
-        <!-- PICTURE -->
-
-        <button
-          id="photo-frame"
-          class="object photo-frame"
-          aria-label="相框"
-        >
-
-          <span class="photo-inner">
-            <span class="photo-person"></span>
-            <span class="photo-heart">♥</span>
-          </span>
-
-        </button>
-
-
-        <!-- CLOCK -->
-
-        <button
-          id="clock"
-          class="object clock"
-          aria-label="時鐘"
-        >
-
-          <span class="clock-face">
-
-            <span class="clock-number n12">12</span>
-            <span class="clock-number n1">1</span>
-            <span class="clock-number n2">2</span>
-            <span class="clock-number n3">3</span>
-            <span class="clock-number n4">4</span>
-            <span class="clock-number n5">5</span>
-            <span class="clock-number n6">6</span>
-            <span class="clock-number n7">7</span>
-            <span class="clock-number n8">8</span>
-            <span class="clock-number n9">9</span>
-            <span class="clock-number n10">10</span>
-            <span class="clock-number n11">11</span>
-
-            <span class="clock-hand hour"></span>
-            <span class="clock-hand minute"></span>
-
-            <span class="clock-center"></span>
-
-          </span>
-
-        </button>
-
-
-        <!-- WALL DECOR -->
-
-        <div class="wall-decoration decoration-1"></div>
-        <div class="wall-decoration decoration-2"></div>
+        <div id="progress-text" class="progress-text">
+          TREASURE 0 / 5
+        </div>
 
       </div>
 
 
-      <!-- FLOOR -->
+      <!-- =================================================
+           房間
+           ================================================= -->
 
-      <div class="floor">
+      <section id="room" class="room">
 
-        <!-- RUG -->
+        <!-- 背景牆 -->
+        <div class="wall"></div>
+
+        <!-- 地板 -->
+        <div class="floor"></div>
+
+
+        <!-- =================================================
+             窗戶
+             ================================================= -->
 
         <button
-          id="rug"
-          class="object rug"
-          aria-label="地毯"
+          id="window-object"
+          class="scene-object window-object"
+          type="button"
+          aria-label="窗戶"
         >
-          <span class="rug-pattern"></span>
+
+          <div class="window-frame">
+
+            <div class="window-glass">
+              <div class="window-cloud cloud-one"></div>
+              <div class="window-cloud cloud-two"></div>
+            </div>
+
+            <div class="window-cross vertical"></div>
+            <div class="window-cross horizontal"></div>
+
+          </div>
+
+          <div class="curtain curtain-left"></div>
+          <div class="curtain curtain-right"></div>
+
         </button>
 
 
-        <!-- BED -->
+        <!-- =================================================
+             書桌
+             ================================================= -->
+
+        <div class="desk">
+
+          <!-- 桌面 -->
+          <div class="desk-top"></div>
+
+          <!-- 桌腳 -->
+          <div class="desk-leg desk-leg-left"></div>
+          <div class="desk-leg desk-leg-right"></div>
+
+          <!-- 桌面上的東西 -->
+          <div class="desk-props">
+
+            <!-- 日記本 -->
+            <button
+              id="diary-object"
+              class="scene-object diary-object"
+              type="button"
+              aria-label="白色日記本"
+            >
+              <span class="diary-cover"></span>
+              <span class="diary-pages"></span>
+              <span class="diary-line line-one"></span>
+              <span class="diary-line line-two"></span>
+            </button>
+
+
+            <!-- 蛋糕 -->
+            <button
+              id="cake-object"
+              class="scene-object cake-object"
+              type="button"
+              aria-label="生日蛋糕"
+            >
+
+              <span class="cake-plate"></span>
+
+              <span class="cake-body">
+                <span class="cake-top"></span>
+                <span class="cake-cream"></span>
+                <span class="cake-cream cream-two"></span>
+              </span>
+
+              <span class="candle">
+                <span class="candle-fire"></span>
+              </span>
+
+            </button>
+
+
+            <!-- 檯燈 -->
+            <button
+              id="lamp-object"
+              class="scene-object lamp-object"
+              type="button"
+              aria-label="檯燈"
+            >
+              <span class="lamp-shade"></span>
+              <span class="lamp-pole"></span>
+              <span class="lamp-base"></span>
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             抽屜
+             ================================================= -->
+
+        <button
+          id="drawer-object"
+          class="scene-object drawer-object"
+          type="button"
+          aria-label="抽屜"
+        >
+
+          <span class="drawer-front"></span>
+          <span class="drawer-handle"></span>
+
+        </button>
+
+
+        <!-- =================================================
+             牆上的照片
+             ================================================= -->
+
+        <button
+          id="frame-object"
+          class="scene-object frame-object"
+          type="button"
+          aria-label="照片框"
+        >
+
+          <span class="frame-outer"></span>
+          <span class="frame-inner">
+
+            <span class="frame-photo">
+              PHOTO
+            </span>
+
+          </span>
+
+        </button>
+
+
+        <!-- =================================================
+             時鐘
+             ================================================= -->
+
+        <button
+          id="clock-object"
+          class="scene-object clock-object"
+          type="button"
+          aria-label="時鐘"
+        >
+
+          <span class="clock-body">
+
+            <span class="clock-face">
+
+              <span class="clock-number n12">12</span>
+              <span class="clock-number n3">3</span>
+              <span class="clock-number n6">6</span>
+              <span class="clock-number n9">9</span>
+
+              <span class="clock-hand hour-hand"></span>
+              <span class="clock-hand minute-hand"></span>
+
+            </span>
+
+          </span>
+
+        </button>
+
+
+        <!-- =================================================
+             衣櫃
+             ================================================= -->
+
+        <button
+          id="wardrobe-object"
+          class="scene-object wardrobe-object"
+          type="button"
+          aria-label="衣櫃"
+        >
+
+          <span class="wardrobe-body">
+
+            <span class="wardrobe-door left-door">
+              <span class="door-handle"></span>
+            </span>
+
+            <span class="wardrobe-door right-door">
+              <span class="door-handle"></span>
+            </span>
+
+            <span class="wardrobe-top"></span>
+            <span class="wardrobe-bottom"></span>
+
+          </span>
+
+        </button>
+
+
+        <!-- =================================================
+             床
+             ================================================= -->
 
         <div class="bed">
 
           <div class="bed-head"></div>
 
-          <div class="bed-mattress">
+          <div class="bed-frame">
+
+            <div class="mattress"></div>
+
+            <div class="blanket">
+              <span class="blanket-line"></span>
+              <span class="blanket-line line-two"></span>
+            </div>
 
             <div class="pillow"></div>
 
-            <div class="dog-blanket">
-              <span class="blanket-dog-face">
-                <span class="dog-ear left"></span>
-                <span class="dog-ear right"></span>
-                <span class="dog-eye left"></span>
-                <span class="dog-eye right"></span>
-                <span class="dog-nose"></span>
-              </span>
-            </div>
-
           </div>
 
-          <div class="bed-leg left"></div>
-          <div class="bed-leg right"></div>
+          <div class="bed-leg bed-leg-one"></div>
+          <div class="bed-leg bed-leg-two"></div>
 
         </div>
 
 
-        <!-- WARDROBE -->
+        <!-- =================================================
+             小狗玩偶
+             ================================================= -->
 
         <button
-          id="wardrobe"
-          class="object wardrobe"
-          aria-label="衣櫃"
-        >
-
-          <span class="wardrobe-top"></span>
-
-          <span class="wardrobe-body">
-
-            <span class="wardrobe-door left"></span>
-            <span class="wardrobe-door right"></span>
-
-            <span class="wardrobe-handle left"></span>
-            <span class="wardrobe-handle right"></span>
-
-          </span>
-
-        </button>
-
-
-        <!-- SHIRT -->
-
-        <button
-          id="shirt"
-          class="object shirt"
-          aria-label="黑白襯衫"
-        >
-
-          <span class="shirt-body"></span>
-          <span class="shirt-sleeve left"></span>
-          <span class="shirt-sleeve right"></span>
-          <span class="shirt-collar"></span>
-
-        </button>
-
-
-        <!-- SPEAKER -->
-
-        <button
-          id="speaker"
-          class="object speaker"
-          aria-label="音響"
-        >
-
-          <span class="speaker-top"></span>
-
-          <span class="speaker-circle big"></span>
-          <span class="speaker-circle small"></span>
-
-          <span class="speaker-light"></span>
-
-        </button>
-
-
-        <!-- DRAWER -->
-
-        <button
-          id="drawer"
-          class="object drawer"
-          aria-label="抽屜"
-        >
-
-          <span class="drawer-body"></span>
-
-          <span class="drawer-front">
-            <span class="drawer-handle"></span>
-          </span>
-
-        </button>
-
-
-        <!-- DESK -->
-
-        <div class="desk">
-
-          <!-- DESK TOP -->
-
-          <div class="desk-top">
-
-            <!-- DIARY -->
-
-            <button
-              id="diary"
-              class="object diary"
-              aria-label="白色日記本"
-            >
-
-              <span class="diary-cover"></span>
-              <span class="diary-pages"></span>
-              <span class="diary-line line-1"></span>
-              <span class="diary-line line-2"></span>
-              <span class="diary-line line-3"></span>
-
-            </button>
-
-
-            <!-- CHOCOLATE CAKE -->
-
-            <button
-              id="cake"
-              class="object chocolate-cake"
-              aria-label="巧克力蛋糕"
-            >
-
-              <span class="cake-plate"></span>
-
-              <span class="cake-bottom"></span>
-
-              <span class="cake-cream"></span>
-
-              <span class="cake-top"></span>
-
-              <span class="cake-chocolate"></span>
-
-              <span class="cake-candle">
-                <span class="candle-flame"></span>
-              </span>
-
-            </button>
-
-
-            <!-- LAMP -->
-
-            <div class="desk-lamp">
-
-              <span class="lamp-shade"></span>
-              <span class="lamp-pole"></span>
-              <span class="lamp-base"></span>
-
-            </div>
-
-          </div>
-
-
-          <!-- DESK FRONT -->
-
-          <div class="desk-front">
-
-            <div class="desk-drawer-line"></div>
-
-          </div>
-
-          <div class="desk-leg left"></div>
-          <div class="desk-leg right"></div>
-
-        </div>
-
-
-        <!-- DOG TOY -->
-
-        <button
-          id="dog-toy"
-          class="object dog-toy"
+          id="dog-object"
+          class="scene-object dog-object"
+          type="button"
           aria-label="小狗玩偶"
         >
 
-          <span class="dog-ear left"></span>
-          <span class="dog-ear right"></span>
+          <span class="dog-ear dog-ear-left"></span>
+          <span class="dog-ear dog-ear-right"></span>
 
           <span class="dog-head">
-
-            <span class="dog-eye left"></span>
-            <span class="dog-eye right"></span>
-
-            <span class="dog-muzzle"></span>
+            <span class="dog-eye eye-left"></span>
+            <span class="dog-eye eye-right"></span>
             <span class="dog-nose"></span>
-
+            <span class="dog-mouth"></span>
           </span>
 
           <span class="dog-body"></span>
 
-          <span class="dog-foot left"></span>
-          <span class="dog-foot right"></span>
+          <span class="dog-foot foot-left"></span>
+          <span class="dog-foot foot-right"></span>
 
         </button>
 
 
-        <!-- SMALL DECOR -->
-
-        <div class="plant">
-          <span class="plant-pot"></span>
-          <span class="plant-leaf leaf-1"></span>
-          <span class="plant-leaf leaf-2"></span>
-          <span class="plant-leaf leaf-3"></span>
-        </div>
-
-
-        <!-- SUNLIGHT -->
-
-        <div class="sunlight"></div>
-
-        <div class="dust dust-1"></div>
-        <div class="dust dust-2"></div>
-        <div class="dust dust-3"></div>
-        <div class="dust dust-4"></div>
-
-      </div>
-
-    </div>
-
-
-    <!-- =========================
-         GAME UI
-    ========================== -->
-
-    <div class="game-ui">
-
-      <div class="progress">
-        <span id="progress-count">0</span>
-        <span>/</span>
-        <span>5</span>
-        <span class="progress-label">TREASURES</span>
-      </div>
-
-      <button id="hint-button">
-        ?
-      </button>
-
-    </div>
-
-
-    <!-- =========================
-         CURTAIN
-    ========================== -->
-
-    <div id="curtain-transition" class="curtain-transition">
-
-      <div class="big-curtain curtain-left"></div>
-      <div class="big-curtain curtain-right"></div>
-
-      <div class="curtain-light"></div>
-
-    </div>
-
-
-    <!-- =========================
-         DIARY MODAL
-    ========================== -->
-
-    <div id="diary-modal" class="modal hidden">
-
-      <div class="diary-modal-box">
+        <!-- =================================================
+             音響
+             ================================================= -->
 
         <button
-          id="close-diary"
-          class="close-button"
+          id="speaker-object"
+          class="scene-object speaker-object"
+          type="button"
+          aria-label="音響"
         >
-          ×
+
+          <span class="speaker-body">
+            <span class="speaker-top"></span>
+            <span class="speaker-circle big"></span>
+            <span class="speaker-circle small"></span>
+          </span>
+
         </button>
 
-        <p class="memory-label">
-          PRIVATE DIARY
-        </p>
 
-        <h2>給未來的你</h2>
+        <!-- =================================================
+             地毯
+             ================================================= -->
 
-        <div class="diary-paper">
+        <button
+          id="rug-object"
+          class="scene-object rug-object"
+          type="button"
+          aria-label="地毯"
+        >
 
-          <p>
-            如果你看到這一頁，
-          </p>
+          <span class="rug-pattern pattern-one"></span>
+          <span class="rug-pattern pattern-two"></span>
+          <span class="rug-pattern pattern-three"></span>
 
-          <p>
-            代表你已經開始尋找房間裡
-            藏起來的小秘密了。
-          </p>
+        </button>
 
-          <p>
-            有些東西看起來只是普通的家具，
-            但仔細看，
-            也許會發現不一樣的地方。
-          </p>
 
-          <p class="diary-highlight">
-            「時間會告訴你第一個答案。」
-          </p>
+        <!-- =================================================
+             玩家提示
+             ================================================= -->
+
+        <div id="scene-hint" class="scene-hint hidden"></div>
+
+
+        <!-- =================================================
+             窗簾轉場
+             ================================================= -->
+
+        <div id="curtain-transition" class="curtain-transition">
+
+          <div class="transition-curtain transition-left"></div>
+          <div class="transition-curtain transition-right"></div>
 
         </div>
 
-        <button
-          id="close-diary-button"
-          class="code-submit"
-        >
-          CLOSE DIARY
-        </button>
-
-      </div>
-
-    </div>
+      </section>
 
 
-    <!-- =========================
-         DRAWER CODE
-    ========================== -->
+      <!-- 底部提示 -->
 
-    <div id="drawer-modal" class="modal hidden">
-
-      <div class="drawer-code-box">
-
-        <button
-          id="close-drawer-code"
-          class="close-button"
-        >
-          ×
-        </button>
-
-        <p class="code-small">
-          LOCKED DRAWER
-        </p>
-
-        <h2>
-          輸入時間
-        </h2>
-
-        <p class="code-hint">
-          時鐘上的時間，也許就是答案。
-        </p>
-
-        <form id="drawer-form">
-
-          <input
-            id="drawer-code"
-            type="text"
-            inputmode="numeric"
-            maxlength="5"
-            placeholder="10:05"
-            autocomplete="off"
-          >
-
-          <button
-            type="submit"
-            class="code-submit"
-          >
-            UNLOCK
-          </button>
-
-        </form>
-
-        <p id="drawer-message"></p>
-
-      </div>
-
-    </div>
-
-
-    <!-- =========================
-         DRAWER REWARD
-    ========================== -->
-
-    <div id="drawer-reward" class="modal hidden">
-
-      <div class="reward-box">
-
-        <p class="reward-label">
-          TREASURE 01
-        </p>
-
-        <h2>
-          抽屜裡有一份小禮物
-        </h2>
-
-        <div class="gift-pixel">
-          🎁
-        </div>
-
-        <p>
-          你找到了第一份生日寶物。
-        </p>
-
-        <button
-          id="close-reward"
-          class="code-submit"
-        >
-          TAKE IT
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- =========================
-         DOG MEMORY
-    ========================== -->
-
-    <div id="dog-memory-modal" class="modal hidden">
-
-      <div class="dog-memory">
-
-        <button
-          id="close-dog-memory"
-          class="close-button"
-        >
-          ×
-        </button>
-
-        <p class="memory-label">
-          MEMORY 01
-        </p>
-
-        <div class="dog-photo-frame">
-
-          <img
-            src="images/dog.jpg"
-            alt="小狗的大貓咪"
-          >
-
-        </div>
-
-        <h2>
-          小狗的大貓咪
-        </h2>
-
-        <div class="memory-line"></div>
-
-        <p class="memory-text">
-          原來一直陪著小狗的人，
-          也偷偷留下了自己的照片。
-        </p>
-
-        <p class="memory-clue">
-          「照片裡的日期，記得看看。」
-        </p>
-
-        <button
-          id="close-dog-memory-button"
-          class="code-submit"
-        >
-          KEEP THIS MEMORY
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- =========================
-         SIMPLE OBJECT MESSAGE
-    ========================== -->
-
-    <div
-      id="message-box"
-      class="message-box hidden"
-    >
-      <span id="message-text"></span>
-    </div>
-
-
-    <!-- =========================
-         FINAL
-    ========================== -->
-
-    <div
-      id="ending"
-      class="ending hidden"
-    >
-
-      <div class="ending-content">
-
-        <div class="final-cake">
-
-          <div class="final-cake-body"></div>
-          <div class="final-cream"></div>
-          <div class="final-candle"></div>
-          <div class="final-flame"></div>
-
-        </div>
-
-        <p class="ending-small">
-          YOU FOUND EVERYTHING
-        </p>
-
-        <h1>
-          HAPPY BIRTHDAY
-        </h1>
-
-        <p class="ending-message">
-          願你的每一天，
-          都像今天一樣，
-          有人記得、有光、有一點點驚喜。
-        </p>
-
-        <div class="final-letter">
-          ♡
-        </div>
-
+      <div class="bottom-help">
+        點擊房間裡的物品探索
       </div>
 
     </div>
 
   </main>
+
+
+  <!-- =====================================================
+       抽屜 MODAL
+       ===================================================== -->
+
+  <div id="drawer-modal" class="modal hidden">
+
+    <div class="modal-box">
+
+      <button
+        class="modal-close"
+        data-close="drawer-modal"
+        type="button"
+      >
+        X
+      </button>
+
+      <div class="modal-label">
+        DRAWER
+      </div>
+
+      <h2>抽屜上鎖了</h2>
+
+      <p>
+        時鐘停留的時間，也許就是答案。
+      </p>
+
+      <input
+        id="drawer-input"
+        type="text"
+        inputmode="numeric"
+        maxlength="5"
+        placeholder="10:05"
+      >
+
+      <button
+        id="drawer-submit"
+        class="modal-button"
+        type="button"
+      >
+        UNLOCK
+      </button>
+
+      <p id="drawer-message" class="modal-message"></p>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       日記 MODAL
+       ===================================================== -->
+
+  <div id="diary-modal" class="modal hidden">
+
+    <div class="modal-box">
+
+      <button
+        class="modal-close"
+        data-close="diary-modal"
+        type="button"
+      >
+        X
+      </button>
+
+      <div class="modal-label">
+        DIARY
+      </div>
+
+      <h2>白色日記本</h2>
+
+      <div class="diary-paper">
+
+        <p>
+          今天好像藏了一些東西。
+        </p>
+
+        <p>
+          如果你找到這本日記，
+          那麼桌上的蛋糕應該也看到了。
+        </p>
+
+        <p>
+          下一個線索，
+          藏在那個總是陪在身邊的小傢伙那裡。
+        </p>
+
+      </div>
+
+      <button
+        class="modal-button"
+        data-close="diary-modal"
+        type="button"
+      >
+        CLOSE
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       小狗 MODAL
+       ===================================================== -->
+
+  <div id="dog-modal" class="modal hidden">
+
+    <div class="modal-box dog-modal-box">
+
+      <button
+        class="modal-close"
+        data-close="dog-modal"
+        type="button"
+      >
+        X
+      </button>
+
+      <div class="modal-label">
+        MEMORY
+      </div>
+
+      <h2>小狗的大貓咪</h2>
+
+      <div class="dog-memory-photo">
+
+        <img
+          id="dog-photo"
+          src="images/dog.jpg"
+          alt="回憶照片"
+        >
+
+        <div id="photo-fallback" class="photo-fallback">
+          把照片放進<br>
+          images/dog.jpg
+        </div>
+
+      </div>
+
+      <p class="memory-text">
+        有些回憶不需要被藏起來。
+      </p>
+
+      <p class="memory-date">
+        照片日期：<span>【把照片日期寫在這裡】</span>
+      </p>
+
+      <button
+        class="modal-button"
+        data-close="dog-modal"
+        type="button"
+      >
+        CLOSE
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       最終生日畫面
+       ===================================================== -->
+
+  <div id="final-modal" class="modal hidden">
+
+    <div class="modal-box final-box">
+
+      <div class="final-cake">
+
+        <span class="final-cake-top"></span>
+        <span class="final-cake-body"></span>
+
+        <span class="final-candle">
+          <span></span>
+        </span>
+
+      </div>
+
+      <div class="modal-label">
+        TREASURE 05
+      </div>
+
+      <h2>Happy Birthday</h2>
+
+      <p class="final-name">
+        【朋友的名字】
+      </p>
+
+      <div class="final-letter">
+
+        <p>
+          恭喜你找到房間裡藏起來的所有小秘密。
+        </p>
+
+        <p>
+          希望新的一歲，
+          也能有很多值得記住的日子。
+        </p>
+
+        <p>
+          謝謝你來到這裡。
+        </p>
+
+      </div>
+
+      <button
+        id="restart-button"
+        class="modal-button"
+        type="button"
+      >
+        AGAIN
+
+      </button>
+
+    </div>
+
+  </div>
 
 
   <script src="script.js"></script>
