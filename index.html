@@ -18,113 +18,154 @@
   <!-- =====================================================
        登入畫面
        ===================================================== -->
+<section id="login-screen" class="screen login-screen">
+  <div class="login-box">
+    <div class="login-small-text">SYSTEM</div>
 
-  <section id="login-screen" class="screen login-screen">
+    <h1>身分確認中，檢測</h1>
 
-    <div class="login-box">
+    <div class="loading-line">
+      <span></span>
+    </div>
 
-      <div class="login-small-text">
-        SYSTEM
-      </div>
+    <p class="login-description">請輸入通行密碼</p>
 
-      <h1>身分確認中，檢測</h1>
+    <form id="password-form" autocomplete="off">
+      <label for="password-input" class="visually-hidden">
+        通行密碼
+      </label>
 
-      <div class="loading-line">
-        <span></span>
-      </div>
+      <input
+        id="password-input"
+        type="password"
+        inputmode="numeric"
+        maxlength="4"
+        autocomplete="off"
+        placeholder="----"
+      >
 
-      <p class="login-description">
-        請輸入通行密碼
-      </p>
-
-      <form id="password-form" autocomplete="off">
-
-        <label for="password-input" class="visually-hidden">
-          通行密碼
-        </label>
-
-        <input
-          id="password-input"
-          type="password"
-          inputmode="numeric"
-          maxlength="4"
-          autocomplete="off"
-          placeholder="----"
-          aria-label="通行密碼"
-        >
-
-        <button type="submit" id="access-button">
-          ENTER
-        </button>
-
-      </form>
+      <button type="submit" id="access-button">
+        ENTER
+      </button>
+    </form>
 
     <p id="login-message" class="login-message"></p>
-
   </div>
+</section>
+
+
+<!-- =========================
+     窗簾過場
+========================= -->
+<section id="curtain-screen" class="curtain-screen hidden">
+
+  <div class="curtain curtain-left"></div>
+  <div class="curtain curtain-right"></div>
+
+  <div class="curtain-light"></div>
 
 </section>
 
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
+<!-- =========================
+     房間
+========================= -->
+<main id="game-screen" class="game-screen hidden">
 
-  const form = document.getElementById("password-form");
-  const input = document.getElementById("password-input");
-  const button = document.getElementById("access-button");
-  const message = document.getElementById("login-message");
-  const loginScreen = document.getElementById("login-screen");
-  const gameScreen = document.getElementById("game-screen");
+  <div class="room">
 
-  console.log("登入系統已啟動");
+    <!-- 牆 -->
+    <div class="wall"></div>
 
-  // 一進入頁面就讓輸入框取得焦點
-  input.focus();
+    <!-- 地板 -->
+    <div class="floor"></div>
 
-  form.addEventListener("submit", function (event) {
+    <!-- 窗戶 -->
+    <div class="window">
+      <div class="window-glass"></div>
+      <div class="window-frame"></div>
+    </div>
 
-    event.preventDefault();
+    <!-- 書桌 -->
+    <div class="desk">
+      <div class="desk-top">
 
-    const password = input.value.trim();
+        <div class="clock" id="clock">
+          10:05
+        </div>
 
-    console.log("輸入的密碼：", password);
+        <div class="cake">
+          <div class="cake-top"></div>
+          <div class="cake-body"></div>
+          <div class="cake-plate"></div>
+        </div>
 
-    if (password === "0530") {
+        <div class="diary" id="diary">
+          WHITE DIARY
+        </div>
 
-      message.textContent = "ACCESS GRANTED";
+      </div>
 
-      message.style.color = "#f4e8cf";
+      <div class="desk-drawer" id="drawer">
+        DRAWER
+      </div>
 
-      button.disabled = true;
-      input.disabled = true;
+      <div class="desk-leg desk-leg-left"></div>
+      <div class="desk-leg desk-leg-right"></div>
+    </div>
 
-      setTimeout(function () {
 
-        loginScreen.classList.add("hidden");
+    <!-- 床 -->
+    <div class="bed">
+      <div class="bed-head"></div>
+      <div class="bed-mattress"></div>
+      <div class="dog-blanket"></div>
+      <div class="bed-leg bed-leg-left"></div>
+      <div class="bed-leg bed-leg-right"></div>
+    </div>
 
-        if (gameScreen) {
-          gameScreen.classList.remove("hidden");
-        }
 
-      }, 800);
+    <!-- 衣櫃 -->
+    <div class="wardrobe" id="wardrobe">
+      <div class="wardrobe-door">
+        BLACK / WHITE
+      </div>
+    </div>
 
-    } else {
 
-      message.textContent = "ACCESS DENIED";
+    <!-- 相框 -->
+    <div class="picture-frame" id="picture-frame">
+      <div class="picture-inner">
+        MEMORY
+      </div>
+    </div>
 
-      message.style.color = "#d6a88e";
 
-      input.value = "";
+    <!-- 小狗 -->
+    <div class="dog-plush" id="dog-plush">
+      <div class="dog-ear dog-ear-left"></div>
+      <div class="dog-ear dog-ear-right"></div>
+      <div class="dog-head"></div>
+      <div class="dog-body"></div>
+    </div>
 
-      input.focus();
 
-    }
+    <!-- 時鐘 -->
+    <div class="wall-clock">
+      <span>10:05</span>
+    </div>
 
-  });
 
-});
-</script>
+    <!-- 地毯 -->
+    <div class="rug" id="rug"></div>
 
+
+    <!-- 房間提示 -->
+    <div id="room-message" class="room-message"></div>
+
+  </div>
+
+</main>
 
   <!-- =====================================================
        遊戲畫面
