@@ -1,578 +1,173 @@
-/* =========================================================
-   Birthday Adventure
-   ========================================================= */
+document.addEventListener("DOMContentLoaded", function () {
 
+  const loginScreen = document.getElementById("login-screen");
+  const curtainScreen = document.getElementById("curtain-screen");
+  const gameScreen = document.getElementById("game-screen");
 
-/* =========================================================
-   遊戲設定
-   ========================================================= */
+  const passwordForm = document.getElementById("password-form");
+  const passwordInput = document.getElementById("password-input");
+  const accessButton = document.getElementById("access-button");
+  const loginMessage = document.getElementById("login-message");
 
-const PASSWORD = "0530";
-const DRAWER_CODE = "10:05";
+  // 一開始只顯示登入畫面
+  loginScreen.classList.remove("hidden");
+  curtainScreen.classList.add("hidden");
+  gameScreen.classList.add("hidden");
 
+  // 自動讓密碼欄位可以直接輸入
+  passwordInput.focus();
 
-/* =========================================================
-   DOM
-   ========================================================= */
 
-const loginScreen =
-  document.getElementById("login-screen");
+  // =========================
+  // 密碼
+  // =========================
 
-const gameScreen =
-  document.getElementById("game-screen");
+  passwordForm.addEventListener("submit", function (event) {
 
-const passwordForm =
-  document.getElementById("password-form");
+    event.preventDefault();
 
-const passwordInput =
-  document.getElementById("password-input");
+    const password = passwordInput.value.trim();
 
-const loginMessage =
-  document.getElementById("login-message");
+    console.log("輸入密碼：", password);
 
-const curtainTransition =
-  document.getElementById("curtain-transition");
 
-const progressText =
-  document.getElementById("progress-text");
+    if (password === "0530") {
 
-const sceneHint =
-  document.getElementById("scene-hint");
+      // 顯示成功
+      loginMessage.textContent = "ACCESS GRANTED";
+      loginMessage.style.color = "#f4e8cf";
 
+      passwordInput.disabled = true;
+      accessButton.disabled = true;
 
-/* =========================================================
-   遊戲進度
-   ========================================================= */
 
-let treasureCount = 0;
+      // 登入畫面消失
+      setTimeout(function () {
 
-const foundTreasures = new Set();
+        loginScreen.classList.add("hidden");
 
+        // 顯示窗簾過場
+        curtainScreen.classList.remove("hidden");
 
-/* =========================================================
-   工具
-   ========================================================= */
+        // 確保房間其實已經存在
+        gameScreen.classList.remove("hidden");
 
-function showHint(message, duration = 2500) {
+        // 窗簾動畫
+        setTimeout(function () {
 
-  sceneHint.textContent = message;
+          curtainScreen.classList.add("curtain-open");
 
-  sceneHint.classList.remove("hidden");
+        }, 100);
 
-  clearTimeout(showHint.timer);
 
-  showHint.timer = setTimeout(() => {
+        // 窗簾完全打開後
+        setTimeout(function () {
 
-    sceneHint.classList.add("hidden");
+          curtainScreen.classList.add("hidden");
 
-  }, duration);
-}
+        }, 1800);
 
+      }, 700);
 
-function updateProgress() {
 
-  progressText.textContent =
-    `TREASURE ${treasureCount} / 5`;
+    } else {
 
-}
+      // 密碼錯誤
+      loginMessage.textContent = "ACCESS DENIED";
+      loginMessage.style.color = "#d6a88e";
 
+      passwordInput.value = "";
 
-function collectTreasure(number) {
-
-  if (foundTreasures.has(number)) {
-    return;
-  }
-
-  foundTreasures.add(number);
-
-  treasureCount++;
-
-  updateProgress();
-
-  showHint(
-    `找到 Treasure ${number}！`,
-    2200
-  );
-
-  if (treasureCount >= 5) {
-
-    setTimeout(() => {
-
-      openModal("final-modal");
-
-    }, 1200);
-
-  }
-
-}
-
-
-/* =========================================================
-   Modal
-   ========================================================= */
-
-function openModal(id) {
-
-  const modal =
-    document.getElementById(id);
-
-  if (!modal) return;
-
-  modal.classList.remove("hidden");
-
-}
-
-
-function closeModal(id) {
-
-  const modal =
-    document.getElementById(id);
-
-  if (!modal) return;
-
-  modal.classList.add("hidden");
-
-}
-
-
-/* =========================================================
-   登入
-   ========================================================= */
-
-passwordForm.addEventListener("submit", function(event) {
-
-  event.preventDefault();
-
-  const password =
-    passwordInput.value.trim();
-
-  if (password === PASSWORD) {
-
-    loginMessage.textContent =
-      "ACCESS GRANTED";
-
-    loginMessage.style.color =
-      "#f4e8cf";
-
-    passwordInput.disabled = true;
-
-    document.getElementById("access-button").disabled = true;
-
-    setTimeout(() => {
-
-      loginScreen.classList.add("hidden");
-
-      gameScreen.classList.remove("hidden");
-
-      startCurtainTransition();
-
-    }, 700);
-
-  } else {
-
-    loginMessage.textContent =
-      "ACCESS DENIED";
-
-    loginMessage.style.color =
-      "#d6a88e";
-
-    passwordInput.value = "";
-
-    passwordInput.focus();
-
-  }
-
-});
-
-
-/* =========================================================
-   確保一開始輸入框真的能使用
-   ========================================================= */
-
-window.addEventListener("load", () => {
-
-  if (
-    loginScreen &&
-    !loginScreen.classList.contains("hidden")
-  ) {
-
-    setTimeout(() => {
-
-      passwordInput.focus();
-
-    }, 100);
-
-  }
-
-});
-
-
-/* =========================================================
-   窗簾動畫
-   ========================================================= */
-
-function startCurtainTransition() {
-
-  curtainTransition.classList.remove("open");
-
-  setTimeout(() => {
-
-    curtainTransition.classList.add("open");
-
-  }, 300);
-
-}
-
-
-/* =========================================================
-   窗戶
-   ========================================================= */
-
-document
-  .getElementById("window-object")
-  .addEventListener("click", () => {
-
-    showHint(
-      "窗外的光線照進房間，好像有人正在等待。",
-      3000
-    );
-
-  });
-
-
-/* =========================================================
-   時鐘
-   ========================================================= */
-
-document
-  .getElementById("clock-object")
-  .addEventListener("click", () => {
-
-    showHint(
-      "時鐘停在 10:05。",
-      3000
-    );
-
-  });
-
-
-/* =========================================================
-   抽屜
-   ========================================================= */
-
-document
-  .getElementById("drawer-object")
-  .addEventListener("click", () => {
-
-    openModal("drawer-modal");
-
-    const input =
-      document.getElementById("drawer-input");
-
-    setTimeout(() => {
-
-      input.focus();
-
-    }, 100);
-
-  });
-
-
-/* =========================================================
-   抽屜解鎖
-   ========================================================= */
-
-document
-  .getElementById("drawer-submit")
-  .addEventListener("click", unlockDrawer);
-
-
-document
-  .getElementById("drawer-input")
-  .addEventListener("keydown", event => {
-
-    if (event.key === "Enter") {
-
-      unlockDrawer();
+      setTimeout(function () {
+        passwordInput.focus();
+      }, 50);
 
     }
 
   });
 
 
-function unlockDrawer() {
+  // =========================
+  // 房間物件
+  // =========================
 
-  const input =
-    document.getElementById("drawer-input");
+  const dog = document.getElementById("dog-plush");
+  const diary = document.getElementById("diary");
+  const wardrobe = document.getElementById("wardrobe");
+  const pictureFrame = document.getElementById("picture-frame");
+  const rug = document.getElementById("rug");
+  const roomMessage = document.getElementById("room-message");
 
-  const message =
-    document.getElementById("drawer-message");
 
-  const value =
-    input.value.trim();
+  function showMessage(text) {
 
-  if (value === DRAWER_CODE) {
+    roomMessage.textContent = text;
+    roomMessage.classList.add("show");
 
-    message.textContent =
-      "UNLOCKED — 你找到第一個寶物。";
-
-    message.style.color =
-      "#725847";
-
-    collectTreasure(1);
-
-    setTimeout(() => {
-
-      closeModal("drawer-modal");
-
-    }, 1000);
-
-  } else {
-
-    message.textContent =
-      "密碼不對，再看看房間裡的時鐘。";
-
-    message.style.color =
-      "#9b6652";
-
-    input.select();
+    setTimeout(function () {
+      roomMessage.classList.remove("show");
+    }, 2500);
 
   }
 
-}
 
+  // 小狗
+  if (dog) {
 
-/* =========================================================
-   日記
-   ========================================================= */
+    dog.addEventListener("click", function () {
 
-document
-  .getElementById("diary-object")
-  .addEventListener("click", () => {
-
-    openModal("diary-modal");
-
-    collectTreasure(2);
-
-  });
-
-
-/* =========================================================
-   蛋糕
-   ========================================================= */
-
-document
-  .getElementById("cake-object")
-  .addEventListener("click", () => {
-
-    showHint(
-      "蛋糕旁似乎留下了一點線索……小狗知道答案。",
-      3000
-    );
-
-  });
-
-
-/* =========================================================
-   小狗
-   ========================================================= */
-
-document
-  .getElementById("dog-object")
-  .addEventListener("click", () => {
-
-    openModal("dog-modal");
-
-    collectTreasure(3);
-
-  });
-
-
-/* =========================================================
-   衣櫃
-   ========================================================= */
-
-document
-  .getElementById("wardrobe-object")
-  .addEventListener("click", () => {
-
-    showHint(
-      "衣櫃裡掛著一件黑白相間的衣服。",
-      3000
-    );
-
-    collectTreasure(4);
-
-  });
-
-
-/* =========================================================
-   照片框
-   ========================================================= */
-
-document
-  .getElementById("frame-object")
-  .addEventListener("click", () => {
-
-    showHint(
-      "照片框裡藏著一段回憶。再看看地毯附近。",
-      3200
-    );
-
-  });
-
-
-/* =========================================================
-   音響
-   ========================================================= */
-
-document
-  .getElementById("speaker-object")
-  .addEventListener("click", () => {
-
-    showHint(
-      "音響沒有播放音樂，房間卻好像還留著某段旋律。",
-      3200
-    );
-
-  });
-
-
-/* =========================================================
-   地毯
-   ========================================================= */
-
-document
-  .getElementById("rug-object")
-  .addEventListener("click", () => {
-
-    showHint(
-      "地毯底下好像壓著什麼東西……",
-      2800
-    );
-
-    collectTreasure(5);
-
-  });
-
-
-/* =========================================================
-   Modal 關閉按鈕
-   ========================================================= */
-
-document
-  .querySelectorAll("[data-close]")
-  .forEach(button => {
-
-    button.addEventListener("click", () => {
-
-      const id =
-        button.getAttribute("data-close");
-
-      closeModal(id);
+      showMessage("小狗的大貓咪");
 
     });
 
-  });
-
-
-/* =========================================================
-   點 Modal 外部關閉
-   ========================================================= */
-
-document
-  .querySelectorAll(".modal")
-  .forEach(modal => {
-
-    modal.addEventListener("click", event => {
-
-      if (event.target === modal) {
-
-        modal.classList.add("hidden");
-
-      }
-
-    });
-
-  });
-
-
-/* =========================================================
-   ESC 關閉 Modal
-   ========================================================= */
-
-document.addEventListener("keydown", event => {
-
-  if (event.key !== "Escape") {
-    return;
   }
 
-  document
-    .querySelectorAll(".modal:not(.hidden)")
-    .forEach(modal => {
 
-      modal.classList.add("hidden");
+  // 日記
+  if (diary) {
+
+    diary.addEventListener("click", function () {
+
+      showMessage("桌上的日記似乎藏著什麼秘密……");
 
     });
 
+  }
+
+
+  // 衣櫃
+  if (wardrobe) {
+
+    wardrobe.addEventListener("click", function () {
+
+      showMessage("黑白色的衣服整齊掛在裡面。");
+
+    });
+
+  }
+
+
+  // 相框
+  if (pictureFrame) {
+
+    pictureFrame.addEventListener("click", function () {
+
+      showMessage("一張被好好保存的回憶。");
+
+    });
+
+  }
+
+
+  // 地毯
+  if (rug) {
+
+    rug.addEventListener("click", function () {
+
+      showMessage("地毯下面好像藏著東西……");
+
+    });
+
+  }
+
 });
-
-
-/* =========================================================
-   狗狗照片錯誤處理
-   ========================================================= */
-
-const dogPhoto =
-  document.getElementById("dog-photo");
-
-const photoFallback =
-  document.getElementById("photo-fallback");
-
-
-dogPhoto.addEventListener("error", () => {
-
-  dogPhoto.style.display = "none";
-
-  photoFallback.style.display = "flex";
-
-});
-
-
-dogPhoto.addEventListener("load", () => {
-
-  dogPhoto.style.display = "block";
-
-  photoFallback.style.display = "none";
-
-});
-
-
-/* =========================================================
-   最終重新開始
-   ========================================================= */
-
-document
-  .getElementById("restart-button")
-  .addEventListener("click", () => {
-
-    treasureCount = 0;
-
-    foundTreasures.clear();
-
-    updateProgress();
-
-    closeModal("final-modal");
-
-    showHint(
-      "房間裡的秘密又重新等待著你。",
-      2500
-    );
-
-  });
-
-
-/* =========================================================
-   初始進度
-   ========================================================= */
-
-updateProgress();
