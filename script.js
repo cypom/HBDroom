@@ -1,557 +1,343 @@
-document.addEventListener("DOMContentLoaded", () => {
+/* ==================================================
+   GAME DATA
+================================================== */
 
-  /* =====================================================
-     ELEMENTS
-  ===================================================== */
+const PASSWORD = "0530";
+const CLOCK_CODE = "10:05";
 
-  const loginScreen = document.getElementById("login-screen");
-  const gameScreen = document.getElementById("game-screen");
-
-  const passwordForm = document.getElementById("password-form");
-  const passwordInput = document.getElementById("password-input");
-  const accessButton = document.getElementById("access-button");
-  const loginMessage = document.getElementById("login-message");
-
-  const curtain = document.getElementById("curtain-transition");
-
-  const roomMessage = document.getElementById("room-message");
-
-  const progressText = document.getElementById("progress-text");
-
-  const restartButton = document.getElementById("restart-button");
-  const restartFinal = document.getElementById("restart-final");
+let treasures = 0;
+let finalShown = false;
 
 
-  /* =====================================================
-     TREASURE STATE
-  ===================================================== */
+/* ==================================================
+   ELEMENTS
+================================================== */
 
-  const treasures = {
-    diary: false,
-    dog: false,
-    wardrobe: false,
-    photo: false,
-    rug: false
-  };
+const loginScreen = document.getElementById("login-screen");
+const gameScreen = document.getElementById("game-screen");
 
+const passwordInput = document.getElementById("password-input");
+const loginButton = document.getElementById("login-button");
+const loginMessage = document.getElementById("login-message");
 
-  function treasureCount() {
-    return Object.values(treasures).filter(Boolean).length;
-  }
+const progressText = document.getElementById("progress-text");
 
+const modal = document.getElementById("modal");
+const modalTitle = document.getElementById("modal-title");
+const modalContent = document.getElementById("modal-content");
+const modalInputArea = document.getElementById("modal-input-area");
+const modalAction = document.getElementById("modal-action");
+const modalClose = document.getElementById("modal-close");
 
-  function updateProgress() {
-
-    const count = treasureCount();
-
-    progressText.textContent =
-      `TREASURE ${count} / 5`;
-
-    if (count === 5) {
-      setTimeout(() => {
-        openModal("final-modal");
-      }, 500);
-    }
-  }
+const finalScreen = document.getElementById("final-screen");
 
 
-  /* =====================================================
-     MESSAGE
-  ===================================================== */
+/* ==================================================
+   LOGIN
+================================================== */
 
-  let messageTimer = null;
+function login() {
 
-  function showMessage(text) {
+  const password = passwordInput.value.trim();
 
-    if (!roomMessage) return;
-
-    clearTimeout(messageTimer);
-
-    roomMessage.textContent = text;
-
-    roomMessage.classList.add("show");
-
-    messageTimer = setTimeout(() => {
-      roomMessage.classList.remove("show");
-    }, 2500);
-  }
-
-
-  /* =====================================================
-     MODAL
-  ===================================================== */
-
-  function openModal(id) {
-
-    const modal = document.getElementById(id);
-
-    if (!modal) return;
-
-    modal.classList.remove("hidden");
-  }
-
-
-  function closeModal(modal) {
-
-    if (!modal) return;
-
-    modal.classList.add("hidden");
-  }
-
-
-  document.querySelectorAll(".modal-close").forEach(button => {
-
-    button.addEventListener("click", () => {
-
-      const modal = button.closest(".modal");
-
-      closeModal(modal);
-
-    });
-
-  });
-
-
-  document.querySelectorAll(".modal").forEach(modal => {
-
-    modal.addEventListener("click", event => {
-
-      if (event.target === modal) {
-        closeModal(modal);
-      }
-
-    });
-
-  });
-
-
-  /* =====================================================
-     LOGIN
-  ===================================================== */
-
-  passwordInput.focus();
-
-  passwordForm.addEventListener("submit", event => {
-
-    event.preventDefault();
-
-    const password = passwordInput.value.trim();
-
-    if (password !== "0530") {
-
-      loginMessage.textContent = "ACCESS DENIED";
-
-      loginMessage.style.color = "#d39d83";
-
-      passwordInput.value = "";
-
-      passwordInput.focus();
-
-      return;
-    }
-
+  if (password === PASSWORD) {
 
     loginMessage.textContent = "ACCESS GRANTED";
 
-    loginMessage.style.color = "#e8d9b8";
-
-    passwordInput.disabled = true;
-
-    accessButton.disabled = true;
-
+    loginMessage.style.color = "#d7c19a";
 
     setTimeout(() => {
 
-      loginScreen.classList.add("hidden");
+      loginScreen.style.display = "none";
+      gameScreen.style.display = "block";
 
-      gameScreen.classList.remove("hidden");
+      const curtains = document.querySelector(".window-object");
 
-      /*
-        房間先出現。
-        窗簾只是房間內的動畫，
-        不會再蓋住整個網站。
-      */
-
-      if (curtain) {
-
-        curtain.classList.remove("open");
-
-        requestAnimationFrame(() => {
-
-          setTimeout(() => {
-
-            curtain.classList.add("open");
-
-          }, 100);
-
-        });
-
+      if (curtains) {
+        curtains.classList.add("window-open");
       }
 
     }, 700);
 
-  });
+  } else {
 
+    loginMessage.textContent = "ACCESS DENIED";
 
-  /* =====================================================
-     DIARY
-  ===================================================== */
+    loginMessage.style.color = "#c27d68";
 
-  const diary = document.getElementById("diary-object");
-
-  diary.addEventListener("click", () => {
-
-    openModal("diary-modal");
-
-  });
-
-
-  document
-    .getElementById("diary-collect")
-    .addEventListener("click", () => {
-
-      treasures.diary = true;
-
-      updateProgress();
-
-      closeModal(
-        document.getElementById("diary-modal")
-      );
-
-      showMessage(
-        "找到 Treasure 01。也許時鐘才是下一個線索。"
-      );
-
-    });
-
-
-  /* =====================================================
-     CLOCK
-  ===================================================== */
-
-  const clock = document.getElementById("wall-clock");
-
-  clock.addEventListener("click", () => {
-
-    openModal("clock-modal");
-
-  });
-
-
-  document
-    .getElementById("clock-collect")
-    .addEventListener("click", () => {
-
-      closeModal(
-        document.getElementById("clock-modal")
-      );
-
-      showMessage(
-        "記住：10:05。"
-      );
-
-      setTimeout(() => {
-
-        openModal("drawer-modal");
-
-      }, 700);
-
-    });
-
-
-  /* =====================================================
-     DRAWER
-  ===================================================== */
-
-  document
-    .getElementById("drawer-submit")
-    .addEventListener("click", () => {
-
-      const input =
-        document.getElementById("drawer-input");
-
-      const message =
-        document.getElementById("drawer-message");
-
-      const value =
-        input.value.trim();
-
-
-      if (value === "10:05") {
-
-        message.textContent =
-          "LOCK OPENED";
-
-        message.style.color =
-          "#d8c394";
-
-
-        setTimeout(() => {
-
-          closeModal(
-            document.getElementById("drawer-modal")
-          );
-
-          showMessage(
-            "抽屜打開了。裡面放著一張小紙條：去找小狗。"
-          );
-
-        }, 500);
-
-      } else {
-
-        message.textContent =
-          "時間不對。";
-
-        message.style.color =
-          "#c88e7b";
-
-        input.value = "";
-
-        input.focus();
-
-      }
-
-    });
-
-
-  /* =====================================================
-     DOG
-  ===================================================== */
-
-  const dog =
-    document.getElementById("dog-object");
-
-
-  dog.addEventListener("click", () => {
-
-    openModal("dog-modal");
-
-  });
-
-
-  document
-    .getElementById("dog-collect")
-    .addEventListener("click", () => {
-
-      treasures.dog = true;
-
-      updateProgress();
-
-      closeModal(
-        document.getElementById("dog-modal")
-      );
-
-      showMessage(
-        "小狗的大貓咪。找到 Treasure 02。"
-      );
-
-    });
-
-
-  /* =====================================================
-     WARDROBE
-  ===================================================== */
-
-  const wardrobe =
-    document.getElementById("wardrobe-object");
-
-
-  wardrobe.addEventListener("click", () => {
-
-    openModal("wardrobe-modal");
-
-  });
-
-
-  document
-    .getElementById("wardrobe-collect")
-    .addEventListener("click", () => {
-
-      treasures.wardrobe = true;
-
-      updateProgress();
-
-      closeModal(
-        document.getElementById("wardrobe-modal")
-      );
-
-      showMessage(
-        "黑白色的衣服。找到 Treasure 03。"
-      );
-
-    });
-
-
-  /* =====================================================
-     PHOTO FRAME
-  ===================================================== */
-
-  const photo =
-    document.getElementById(
-      "picture-frame-object"
-    );
-
-
-  photo.addEventListener("click", () => {
-
-    openModal("photo-modal");
-
-  });
-
-
-  document
-    .getElementById("photo-collect")
-    .addEventListener("click", () => {
-
-      treasures.photo = true;
-
-      updateProgress();
-
-      closeModal(
-        document.getElementById("photo-modal")
-      );
-
-      showMessage(
-        "回憶被好好保存下來了。找到 Treasure 04。"
-      );
-
-    });
-
-
-  /* =====================================================
-     RUG
-  ===================================================== */
-
-  const rug =
-    document.getElementById("rug-object");
-
-
-  rug.addEventListener("click", () => {
-
-    openModal("rug-modal");
-
-  });
-
-
-  document
-    .getElementById("rug-collect")
-    .addEventListener("click", () => {
-
-      treasures.rug = true;
-
-      updateProgress();
-
-      closeModal(
-        document.getElementById("rug-modal")
-      );
-
-      showMessage(
-        "你找到了最後一份 Treasure。"
-      );
-
-    });
-
-
-  /* =====================================================
-     CAKE
-  ===================================================== */
-
-  const cake =
-    document.getElementById("cake-object");
-
-
-  cake.addEventListener("click", () => {
-
-    showMessage(
-      "巧克力蛋糕還在桌上，先不要吃掉它。"
-    );
-
-  });
-
-
-  /* =====================================================
-     SPEAKER
-  ===================================================== */
-
-  const speaker =
-    document.getElementById("speaker-object");
-
-
-  speaker.addEventListener("click", () => {
-
-    showMessage(
-      "音響裡傳來一段熟悉的旋律。"
-    );
-
-  });
-
-
-  /* =====================================================
-     LAMP
-  ===================================================== */
-
-  const lamp =
-    document.getElementById("lamp-object");
-
-
-  lamp.addEventListener("click", () => {
-
-    showMessage(
-      "暖黃色的燈光照亮了桌面。"
-    );
-
-  });
-
-
-  /* =====================================================
-     RESTART
-  ===================================================== */
-
-  function restartGame() {
-
-    location.reload();
+    passwordInput.value = "";
 
   }
 
+}
 
-  restartButton.addEventListener(
-    "click",
-    restartGame
+
+loginButton.addEventListener("click", login);
+
+passwordInput.addEventListener("keydown", (event) => {
+
+  if (event.key === "Enter") {
+    login();
+  }
+
+});
+
+
+/* ==================================================
+   MODAL
+================================================== */
+
+function openModal(title, content, inputHTML = "", buttonText = "CONTINUE", callback = null) {
+
+  modalTitle.textContent = title;
+  modalContent.textContent = content;
+
+  modalInputArea.innerHTML = inputHTML;
+
+  modalAction.textContent = buttonText;
+
+  modal.style.display = "flex";
+
+  modalAction.onclick = () => {
+
+    if (callback) {
+      callback();
+    } else {
+      closeModal();
+    }
+
+  };
+
+}
+
+
+function closeModal() {
+
+  modal.style.display = "none";
+
+  modalInputArea.innerHTML = "";
+
+}
+
+
+modalClose.addEventListener("click", closeModal);
+
+
+/* ==================================================
+   TREASURE
+================================================== */
+
+function collectTreasure(number) {
+
+  if (treasures >= number) {
+    return;
+  }
+
+  treasures++;
+
+  progressText.textContent =
+    `TREASURES FOUND : ${treasures} / 5`;
+
+  if (treasures >= 5 && !finalShown) {
+
+    finalShown = true;
+
+    setTimeout(() => {
+
+      finalScreen.style.display = "flex";
+
+    }, 800);
+
+  }
+
+}
+
+
+/* ==================================================
+   CLOCK
+================================================== */
+
+document.getElementById("clock-object").addEventListener("click", () => {
+
+  openModal(
+    "CLOCK",
+    "指針停在一個特別的時間。\n\n10 : 05\n\n也許這不是普通的時間。",
+    "",
+    "記住時間",
+    () => {
+      collectTreasure(1);
+      closeModal();
+    }
   );
 
+});
 
-  restartFinal.addEventListener(
-    "click",
-    restartGame
+
+/* ==================================================
+   DIARY
+================================================== */
+
+document.getElementById("diary-object").addEventListener("click", () => {
+
+  openModal(
+    "白色日記本",
+    "翻開日記，第一頁只有一句話：\n\n「有些甜甜的東西，總要留給最重要的人。」\n\n桌上似乎還有什麼東西。",
+    "",
+    "繼續尋找",
+    () => {
+      closeModal();
+    }
   );
 
-
-  /* =====================================================
-     DRAWER ENTER KEY
-  ===================================================== */
-
-  document
-    .getElementById("drawer-input")
-    .addEventListener("keydown", event => {
-
-      if (event.key === "Enter") {
-
-        event.preventDefault();
-
-        document
-          .getElementById("drawer-submit")
-          .click();
-
-      }
-
-    });
+});
 
 
-  /* =====================================================
-     INITIAL
-  ===================================================== */
+/* ==================================================
+   CAKE
+================================================== */
 
-  updateProgress();
+document.getElementById("cake-object").addEventListener("click", () => {
+
+  openModal(
+    "桌上的蛋糕",
+    "小小的蛋糕安靜地放在桌上。\n\n蛋糕旁邊壓著一張紙條：\n\n「真正重要的東西，不在桌上。」",
+    "",
+    "尋找線索",
+    () => {
+      collectTreasure(2);
+      closeModal();
+    }
+  );
+
+});
+
+
+/* ==================================================
+   DOG
+================================================== */
+
+document.getElementById("dog-object").addEventListener("click", () => {
+
+  openModal(
+    "小狗玩偶",
+    "你拿起小狗玩偶。\n\n背後縫著一小張紙條：\n\n「小狗的大貓咪」\n\n這個稱呼似乎只屬於某個人。",
+    "",
+    "打開紙條",
+    () => {
+
+      openModal(
+        "小狗的大貓咪",
+        "紙條裡還夾著一張照片。\n\n照片背面寫著：\n\n「【把照片日期寫在這裡】」",
+        "",
+        "收下這段記憶",
+        () => {
+          collectTreasure(3);
+          closeModal();
+        }
+      );
+
+    }
+  );
+
+});
+
+
+/* ==================================================
+   WARDROBE
+================================================== */
+
+document.getElementById("wardrobe-object").addEventListener("click", () => {
+
+  openModal(
+    "衣櫃",
+    "衣櫃裡掛著一件黑白相間的衣服。\n\n衣服口袋裡有一張照片。",
+    "",
+    "查看照片",
+    () => {
+
+      openModal(
+        "黑白照片",
+        "照片裡保存著一個普通卻珍貴的瞬間。\n\n也許真正的寶物，就是這些一起走過的日子。",
+        "",
+        "收下回憶",
+        () => {
+          collectTreasure(4);
+          closeModal();
+        }
+      );
+
+    }
+  );
+
+});
+
+
+/* ==================================================
+   PICTURE
+================================================== */
+
+document.getElementById("picture-object").addEventListener("click", () => {
+
+  openModal(
+    "照片框",
+    "照片框裡沒有寫名字。\n\n但你知道，這個位置一定是為某個重要的人留下的。",
+    "",
+    "繼續",
+    () => {
+      closeModal();
+    }
+  );
+
+});
+
+
+/* ==================================================
+   RUG
+================================================== */
+
+document.getElementById("rug-object").addEventListener("click", () => {
+
+  openModal(
+    "地毯",
+    "你掀起地毯的一角。\n\n底下藏著最後一張紙條：\n\n「如果你走到這裡，代表你已經找回了所有東西。」\n\n「那麼，生日快樂。」",
+    "",
+    "找到最後的寶物",
+    () => {
+      collectTreasure(5);
+      closeModal();
+    }
+  );
+
+});
+
+
+/* ==================================================
+   SPEAKER
+================================================== */
+
+document.getElementById("speaker-object").addEventListener("click", () => {
+
+  openModal(
+    "音響",
+    "音響裡沒有播放音樂。\n\n只有一個小小的標籤：\n\nPLAY WHEN YOU MISS THIS ROOM.",
+    "",
+    "關閉",
+    () => {
+      closeModal();
+    }
+  );
+
+});
+
+
+/* ==================================================
+   CLOSE MODAL WITH ESC
+================================================== */
+
+document.addEventListener("keydown", (event) => {
+
+  if (event.key === "Escape") {
+    closeModal();
+  }
 
 });
