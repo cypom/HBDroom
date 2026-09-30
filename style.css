@@ -14,8 +14,8 @@ body {
 }
 
 body {
-  background: #171511;
-  color: #eee2c9;
+  background: #171411;
+  color: #eee1c6;
 
   font-family:
     "Courier New",
@@ -24,11 +24,6 @@ body {
 
   image-rendering: pixelated;
 }
-
-
-/* =========================================================
-   BASIC
-========================================================= */
 
 button,
 input {
@@ -55,40 +50,40 @@ button {
   align-items: center;
   justify-content: center;
 
-  background: #171511;
-
   padding: 24px;
+
+  background: #171411;
 }
 
 .login-box {
   width: min(520px, 92vw);
 
-  padding: 50px 40px;
+  padding: 48px 40px;
 
-  border: 4px solid #75674f;
+  border: 5px solid #75664e;
 
-  background: #211e19;
+  background: #211d18;
 
   text-align: center;
 
   box-shadow:
-    8px 8px 0 #0d0c0a;
+    10px 10px 0 #0b0a09;
 }
 
 .login-small {
-  color: #9e9176;
+  margin-bottom: 20px;
+
+  color: #9c9079;
 
   font-size: 12px;
 
-  letter-spacing: 4px;
-
-  margin-bottom: 22px;
+  letter-spacing: 5px;
 }
 
 .login-box h1 {
   margin: 0;
 
-  color: #f0e2c5;
+  color: #f1e3c8;
 
   font-size: clamp(20px, 4vw, 30px);
 
@@ -99,22 +94,19 @@ button {
   width: 80px;
   height: 4px;
 
-  margin: 28px auto;
+  margin: 25px auto;
 
-  background: #a99772;
+  background: #b19a6e;
 }
 
 .login-hint {
-  color: #a69b88;
+  color: #aaa08d;
 
   font-size: 13px;
-
-  margin-bottom: 20px;
 }
 
 #password-form {
   display: flex;
-
   flex-direction: column;
 
   gap: 12px;
@@ -123,15 +115,15 @@ button {
 #password-input {
   width: 100%;
 
-  padding: 15px;
+  padding: 14px;
 
-  border: 3px solid #75674f;
+  border: 3px solid #74654e;
 
   outline: none;
 
-  background: #11100e;
+  background: #100f0d;
 
-  color: #f3e8d2;
+  color: #f3e6cb;
 
   text-align: center;
 
@@ -141,17 +133,17 @@ button {
 }
 
 #password-input:focus {
-  border-color: #c1aa7c;
+  border-color: #c5ad7c;
 }
 
 #access-button {
   padding: 14px;
 
-  border: 3px solid #a99772;
+  border: 3px solid #a58f68;
 
-  background: #75674f;
+  background: #77664d;
 
-  color: #171511;
+  color: #171411;
 
   font-weight: bold;
 
@@ -159,7 +151,7 @@ button {
 }
 
 #access-button:hover {
-  background: #c1aa7c;
+  background: #b9a174;
 }
 
 #login-message {
@@ -182,9 +174,9 @@ button {
 #game-screen {
   min-height: 100vh;
 
-  background: #b9a383;
+  padding: 30px 18px 50px;
 
-  padding: 24px 16px 50px;
+  background: #8e785e;
 }
 
 .game-wrapper {
@@ -202,60 +194,100 @@ button {
   position: relative;
 
   width: 100%;
+  height: min(680px, 70vw);
 
-  aspect-ratio: 16 / 9;
-
-  min-height: 620px;
+  min-height: 580px;
 
   overflow: hidden;
 
-  border: 8px solid #3b3126;
+  border: 8px solid #3c3025;
 
-  background: #b8a27f;
+  background: #bca681;
 
   box-shadow:
-    12px 12px 0 rgba(40, 31, 22, 0.35);
+    12px 12px 0 #594838;
 }
 
 
-/* WALL */
+/* =========================================================
+   WALL
+========================================================= */
 
 .wall {
   position: absolute;
 
   left: 0;
-  right: 0;
   top: 0;
 
-  height: 68%;
+  width: 100%;
+  height: 65%;
 
-  background: #cbbb9c;
+  background: #cbb998;
 
-  border-bottom: 8px solid #8b7658;
+  border-bottom: 8px solid #897255;
 }
 
 
-/* FLOOR */
+/* =========================================================
+   FLOOR
+========================================================= */
 
 .floor {
   position: absolute;
 
   left: 0;
-  right: 0;
   bottom: 0;
 
-  height: 32%;
+  width: 100%;
+  height: 35%;
 
-  background: #a88c68;
+  background: #a78964;
+}
 
-  background-image:
-    repeating-linear-gradient(
-      0deg,
-      transparent 0,
-      transparent 28px,
-      rgba(70, 51, 34, 0.12) 29px,
-      rgba(70, 51, 34, 0.12) 32px
-    );
+.floor::before,
+.floor::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+
+  width: 100%;
+
+  height: 4px;
+
+  background: #806344;
+}
+
+.floor::before {
+  top: 35%;
+}
+
+.floor::after {
+  top: 70%;
+}
+
+
+/* =========================================================
+   COMMON OBJECT
+========================================================= */
+
+.object-button {
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: inherit;
+
+  appearance: none;
+}
+
+.object-button:focus-visible {
+  outline: 3px solid #ead6a9;
+  outline-offset: 4px;
 }
 
 
@@ -266,13 +298,13 @@ button {
 .window-object {
   position: absolute;
 
+  left: 6%;
   top: 8%;
-  left: 7%;
 
-  width: 27%;
-  height: 39%;
+  width: 29%;
+  height: 38%;
 
-  z-index: 5;
+  z-index: 10;
 }
 
 .window-frame {
@@ -280,39 +312,65 @@ button {
 
   inset: 0;
 
-  border: 10px solid #5d4a35;
+  border: 9px solid #574533;
 
-  background: #e1d4b8;
+  background: #6f7678;
 
   box-shadow:
-    6px 6px 0 #80694c;
+    6px 6px 0 #80684b;
 }
 
 .window-glass {
   position: absolute;
 
-  inset: 12px;
+  inset: 10px;
 
   overflow: hidden;
 
-  background: #7f8790;
+  background: #59666d;
+}
 
-  border: 4px solid #403b35;
+.window-cross {
+  position: absolute;
+
+  background: #574533;
+
+  z-index: 3;
+}
+
+.window-cross.vertical {
+  width: 8px;
+  height: calc(100% - 18px);
+
+  left: 50%;
+  top: 9px;
+
+  transform: translateX(-50%);
+}
+
+.window-cross.horizontal {
+  width: calc(100% - 18px);
+  height: 8px;
+
+  left: 9px;
+  top: 50%;
+
+  transform: translateY(-50%);
 }
 
 .moon {
   position: absolute;
 
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
 
-  right: 20px;
-  top: 20px;
+  right: 18%;
+  top: 15%;
 
-  background: #eee3c4;
+  background: #eadfbd;
 
   box-shadow:
-    -7px 3px 0 #7f8790;
+    -8px 4px 0 #59666d;
 }
 
 .star {
@@ -321,50 +379,49 @@ button {
   width: 5px;
   height: 5px;
 
-  background: #f0dfb5;
+  background: #ead9ad;
 }
 
 .star-one {
-  left: 25px;
-  top: 28px;
+  left: 15%;
+  top: 25%;
 }
 
 .star-two {
-  left: 75px;
-  top: 55px;
+  left: 35%;
+  top: 42%;
 }
 
 .star-three {
-  right: 48px;
-  top: 75px;
+  right: 20%;
+  top: 52%;
 }
 
 .cloud {
   position: absolute;
 
-  height: 15px;
+  height: 12px;
 
-  background: #b8b5aa;
+  background: #aaa69c;
 }
 
 .cloud-one {
-  left: 10px;
-  bottom: 40px;
+  left: 5%;
+  bottom: 15%;
 
-  width: 80px;
+  width: 28%;
 }
 
 .cloud-two {
-  right: 10px;
-  bottom: 20px;
+  right: 5%;
+  bottom: 28%;
 
-  width: 60px;
+  width: 22%;
 }
 
 
 /* =========================================================
    CURTAIN
-   只在房間內，不會蓋整個網站
 ========================================================= */
 
 #curtain-transition {
@@ -372,11 +429,11 @@ button {
 
   inset: 0;
 
-  z-index: 50;
+  overflow: hidden;
+
+  z-index: 20;
 
   pointer-events: none;
-
-  overflow: hidden;
 }
 
 .transition-left,
@@ -384,25 +441,29 @@ button {
   position: absolute;
 
   top: 0;
-  bottom: 0;
 
   width: 52%;
+  height: 100%;
 
-  background: #6e493b;
+  background: #714b3e;
 
   transition:
-    transform 1.4s steps(8);
+    transform 1.3s steps(8);
 }
 
 .transition-left {
   left: 0;
-
-  transform: translateX(0);
 }
 
 .transition-right {
   right: 0;
+}
 
+#curtain-transition:not(.open) .transition-left {
+  transform: translateX(0);
+}
+
+#curtain-transition:not(.open) .transition-right {
   transform: translateX(0);
 }
 
@@ -422,17 +483,19 @@ button {
 .wall-picture {
   position: absolute;
 
-  top: 9%;
-  right: 6%;
+  right: 5%;
+  top: 8%;
 
   width: 9%;
   aspect-ratio: 1;
 
-  padding: 8px;
+  padding: 7px;
 
-  background: #644c37;
+  background: #624a36;
 
-  box-shadow: 4px 4px 0 #453526;
+  border: 4px solid #463526;
+
+  z-index: 8;
 }
 
 .wall-picture-inner {
@@ -444,279 +507,294 @@ button {
   align-items: center;
   justify-content: center;
 
-  background: #dfcfac;
+  background: #ded0b2;
 
-  color: #7e6b50;
+  color: #806a4e;
 
-  font-size: 25px;
+  font-size: 24px;
 }
 
 
 /* =========================================================
-   DESK
+   CLOCK
 ========================================================= */
 
-.desk-object {
+.wall-clock {
   position: absolute;
 
-  left: 8%;
-  bottom: 21%;
+  left: 40%;
+  top: 9%;
 
-  width: 37%;
-  height: 23%;
+  width: 9%;
+  aspect-ratio: 1;
 
-  z-index: 15;
+  z-index: 12;
 }
 
-.desk-top {
+.clock-face {
   position: absolute;
 
-  left: 0;
-  right: 0;
-  top: 0;
+  inset: 0;
 
-  height: 34%;
+  border: 6px solid #594532;
 
-  border: 6px solid #4f3928;
+  background: #eee3cc;
 
-  background: #805e3f;
-
-  box-shadow: 5px 5px 0 #59402b;
+  box-shadow:
+    5px 5px 0 #80694c;
 }
 
-.desk-drawer {
+.clock-number {
   position: absolute;
 
-  left: 20%;
-  top: 34%;
+  color: #4c4033;
 
-  width: 60%;
-  height: 48%;
+  font-size: 7px;
 
-  border: 6px solid #4f3928;
-
-  background: #765437;
+  font-weight: bold;
 }
 
-.drawer-handle {
+.twelve {
+  left: 50%;
+  top: 5px;
+
+  transform: translateX(-50%);
+}
+
+.three {
+  right: 4px;
+  top: 50%;
+
+  transform: translateY(-50%);
+}
+
+.six {
+  left: 50%;
+  bottom: 4px;
+
+  transform: translateX(-50%);
+}
+
+.nine {
+  left: 4px;
+  top: 50%;
+
+  transform: translateY(-50%);
+}
+
+.clock-hand {
+  position: absolute;
+
+  left: 50%;
+  bottom: 50%;
+
+  width: 3px;
+
+  transform-origin: bottom;
+
+  background: #49392c;
+}
+
+.clock-hand.hour {
+  height: 27%;
+
+  transform: rotate(302deg);
+}
+
+.clock-hand.minute {
+  height: 38%;
+
+  transform: rotate(60deg);
+}
+
+.clock-center {
   position: absolute;
 
   left: 50%;
   top: 50%;
 
+  width: 7px;
+  height: 7px;
+
   transform: translate(-50%, -50%);
 
-  width: 28px;
-  height: 8px;
-
-  background: #39291d;
+  background: #49392c;
 }
 
-.desk-leg {
+
+/* =========================================================
+   WARDROBE
+========================================================= */
+
+.wardrobe-object {
   position: absolute;
 
-  bottom: -30%;
+  left: 50%;
+  top: 12%;
 
-  width: 9%;
-
+  width: 17%;
   height: 48%;
 
-  background: #4d3928;
+  transform: translateX(-50%);
+
+  background: #765438;
+
+  border: 7px solid #483426;
+
+  box-shadow:
+    7px 7px 0 #5a412d;
+
+  z-index: 9;
 }
 
-.desk-leg.left {
-  left: 5%;
-}
-
-.desk-leg.right {
-  right: 5%;
-}
-
-
-/* =========================================================
-   DIARY
-========================================================= */
-
-.diary-object {
+.wardrobe-top {
   position: absolute;
 
-  left: 7%;
-  top: -70%;
+  left: -7px;
+  right: -7px;
+  top: -16px;
 
-  width: 28%;
-  height: 65%;
+  height: 15px;
 
-  border: 0;
-
-  background: transparent;
-
-  z-index: 20;
+  background: #503925;
 }
 
-.diary-cover {
-  position: absolute;
-
-  left: 0;
-  top: 0;
-
-  width: 100%;
-  height: 85%;
-
-  border: 4px solid #5b5040;
-
-  background: #eee5d0;
-}
-
-.diary-pages {
-  position: absolute;
-
-  left: 8%;
-  top: 8%;
-
-  width: 84%;
-  height: 65%;
-
-  border-left: 3px solid #c6bda9;
-  border-right: 3px solid #c6bda9;
-}
-
-.object-label {
-  position: absolute;
-
-  left: 0;
-  right: 0;
-  bottom: -2px;
-
-  color: #e7dcc4;
-
-  font-size: 8px;
-
-  letter-spacing: 1px;
-}
-
-
-/* =========================================================
-   CAKE
-========================================================= */
-
-.cake-object {
-  position: absolute;
-
-  left: 40%;
-  top: -65%;
-
-  width: 32%;
-  height: 65%;
-
-  border: 0;
-
-  background: transparent;
-}
-
-.cake-base {
-  position: absolute;
-
-  left: 5%;
-  right: 5%;
-  bottom: 8%;
-
-  height: 50%;
-
-  background: #4b2d22;
-
-  border: 4px solid #39221b;
-}
-
-.cake-cream {
-  position: absolute;
-
-  left: 5%;
-  right: 5%;
-  bottom: 45%;
-
-  height: 20%;
-
-  background: #e6d5b5;
-
-  border: 3px solid #b9a27e;
-}
-
-.cake-chocolate {
+.wardrobe-inside {
   position: absolute;
 
   left: 18%;
   right: 18%;
-  top: 17%;
+  top: 20%;
+  bottom: 10%;
 
-  height: 12%;
-
-  background: #5b3425;
+  background: #2d2722;
 }
 
-.cake-candle {
+.wardrobe-door {
   position: absolute;
 
-  left: 50%;
-  top: 0;
+  top: 8%;
+  bottom: 6%;
 
-  width: 5px;
-  height: 25px;
+  width: 45%;
 
-  transform: translateX(-50%);
+  background: #886447;
 
-  background: #eee0bd;
+  border: 4px solid #533d2b;
+
+  z-index: 3;
+}
+
+.left-door {
+  left: 3%;
+}
+
+.right-door {
+  right: 3%;
+}
+
+.door-handle {
+  position: absolute;
+
+  top: 50%;
+
+  width: 7px;
+  height: 7px;
+
+  background: #32251b;
+}
+
+.left-door .door-handle {
+  right: 7%;
+}
+
+.right-door .door-handle {
+  left: 7%;
+}
+
+.wardrobe-object:hover .left-door {
+  transform: translateX(-4px);
+}
+
+.wardrobe-object:hover .right-door {
+  transform: translateX(4px);
+}
+
+.shirt {
+  position: absolute;
+
+  top: 12%;
+
+  width: 23%;
+  height: 58%;
+
+  border: 2px solid #171513;
+}
+
+.shirt.black {
+  background: #24211e;
+}
+
+.shirt.white {
+  left: 38%;
+
+  background: #e7e0d1;
+}
+
+.shirt:nth-child(1) {
+  left: 7%;
+}
+
+.shirt:nth-child(3) {
+  right: 7%;
 }
 
 
 /* =========================================================
-   SPEAKER
+   PICTURE FRAME
 ========================================================= */
 
-.speaker-object {
+.picture-frame-object {
   position: absolute;
 
-  right: 5%;
-  top: -65%;
+  right: 19%;
+  top: 10%;
 
-  width: 22%;
-  height: 65%;
+  width: 11%;
+  aspect-ratio: 1;
 
-  border: 0;
-
-  background: transparent;
+  z-index: 13;
 }
 
-.speaker-body {
+.frame-border {
   position: absolute;
 
   inset: 0;
 
-  border: 5px solid #332c25;
+  padding: 7px;
 
-  background: #51483e;
+  background: #654a34;
+
+  border: 4px solid #453225;
+
+  box-shadow:
+    5px 5px 0 #7e6548;
 }
 
-.speaker-circle {
-  position: absolute;
+.frame-photo {
+  width: 100%;
+  height: 100%;
 
-  left: 50%;
-  top: 40%;
+  display: flex;
 
-  width: 34px;
-  height: 34px;
+  align-items: center;
+  justify-content: center;
 
-  transform: translate(-50%, -50%);
+  background: #d7ccb3;
 
-  border: 5px solid #28221d;
+  color: #766853;
 
-  background: #877764;
-}
-
-.speaker-circle.small {
-  top: 73%;
-
-  width: 18px;
-  height: 18px;
+  font-size: 9px;
 }
 
 
@@ -730,52 +808,54 @@ button {
   right: 5%;
   bottom: 19%;
 
-  width: 47%;
-  height: 37%;
+  width: 45%;
+  height: 38%;
 
-  z-index: 12;
+  z-index: 15;
 }
 
 .bed-headboard {
   position: absolute;
 
   left: 0;
-  right: 0;
   top: 0;
 
-  height: 30%;
+  width: 100%;
+  height: 31%;
 
-  background: #644a34;
+  background: #60462f;
 
-  border: 7px solid #453324;
+  border: 7px solid #443123;
 }
 
 .pillow {
   position: absolute;
 
   left: 8%;
-  top: 23%;
+  top: 22%;
 
-  width: 30%;
+  width: 29%;
   height: 22%;
 
-  background: #e7ddc8;
+  background: #e6ddc8;
 
-  border: 4px solid #a9997e;
+  border: 4px solid #a7967d;
+
+  z-index: 2;
 }
 
 .blanket {
   position: absolute;
 
   left: 0;
-  right: 0;
   bottom: 8%;
 
+  width: 100%;
   height: 58%;
 
-  background: #b3a28a;
+  background: #a99b82;
 
-  border: 7px solid #594532;
+  border: 7px solid #57422f;
 }
 
 .blanket-pattern {
@@ -784,7 +864,7 @@ button {
   width: 14px;
   height: 14px;
 
-  background: #897963;
+  background: #806d59;
 }
 
 .blanket-pattern.one {
@@ -806,14 +886,14 @@ button {
   position: absolute;
 
   left: -2%;
-  right: -2%;
   bottom: 0;
 
+  width: 104%;
   height: 12%;
 
-  background: #503b2a;
+  background: #503a29;
 
-  border: 5px solid #392a1f;
+  border: 5px solid #38281d;
 }
 
 
@@ -824,42 +904,42 @@ button {
 .dog-object {
   position: absolute;
 
-  right: 19%;
-  bottom: 39%;
+  right: 17%;
+  bottom: 31%;
 
-  width: 12%;
-  height: 18%;
+  width: 13%;
+  height: 20%;
 
-  border: 0;
-
-  background: transparent;
-
-  z-index: 20;
+  z-index: 30;
 }
 
 .dog-head {
   position: absolute;
 
   left: 18%;
-  top: 4%;
+  top: 8%;
 
   width: 64%;
   height: 54%;
 
-  background: #c6a879;
+  background: #c5a373;
 
-  border: 5px solid #765b3d;
+  border: 5px solid #765a3b;
+
+  z-index: 3;
 }
 
 .dog-ear {
   position: absolute;
 
-  top: 2%;
+  top: 7%;
 
-  width: 28%;
+  width: 29%;
   height: 38%;
 
   background: #9b794f;
+
+  border: 3px solid #705437;
 
   z-index: 2;
 }
@@ -884,25 +964,25 @@ button {
 }
 
 .dog-eye.left {
-  left: 27%;
+  left: 25%;
 }
 
 .dog-eye.right {
-  right: 27%;
+  right: 25%;
 }
 
 .dog-nose {
   position: absolute;
 
   left: 50%;
-  top: 58%;
+  top: 59%;
 
   width: 9px;
   height: 7px;
 
   transform: translateX(-50%);
 
-  background: #39261c;
+  background: #3a281e;
 }
 
 .dog-body {
@@ -912,278 +992,354 @@ button {
   bottom: 0;
 
   width: 50%;
-  height: 43%;
+  height: 45%;
 
-  background: #b99562;
+  background: #b89563;
 
-  border: 5px solid #765b3d;
+  border: 5px solid #765a3b;
+}
+
+.dog-paw {
+  position: absolute;
+
+  bottom: -1px;
+
+  width: 22%;
+  height: 20%;
+
+  background: #b89563;
+
+  border: 4px solid #765a3b;
+
+  z-index: 4;
+}
+
+.dog-paw.left {
+  left: 22%;
+}
+
+.dog-paw.right {
+  right: 22%;
 }
 
 
 /* =========================================================
-   WARDROBE
+   DESK
 ========================================================= */
 
-.wardrobe-object {
+.desk-object {
+  position: absolute;
+
+  left: 7%;
+  bottom: 20%;
+
+  width: 39%;
+  height: 30%;
+
+  z-index: 40;
+}
+
+
+/* TABLE TOP */
+
+.desk-top {
+  position: absolute;
+
+  left: 0;
+  top: 35%;
+
+  width: 100%;
+  height: 20%;
+
+  background: #805d3e;
+
+  border: 6px solid #4c3727;
+
+  box-shadow:
+    6px 6px 0 #5c422c;
+
+  z-index: 5;
+}
+
+
+/* DRAWER */
+
+.desk-drawer {
+  position: absolute;
+
+  left: 20%;
+  top: 55%;
+
+  width: 60%;
+  height: 30%;
+
+  background: #755237;
+
+  border: 6px solid #493426;
+
+  z-index: 4;
+}
+
+.drawer-handle {
   position: absolute;
 
   left: 50%;
-  top: 11%;
-
-  width: 17%;
-  height: 46%;
-
-  transform: translateX(-50%);
-
-  border: 7px solid #493525;
-
-  background: #75543a;
-
-  z-index: 10;
-}
-
-.wardrobe-top {
-  position: absolute;
-
-  left: -6px;
-  right: -6px;
-  top: -16px;
-
-  height: 14px;
-
-  background: #503a28;
-}
-
-.wardrobe-door {
-  position: absolute;
-
-  top: 10%;
-  bottom: 7%;
-
-  width: 45%;
-
-  background: #876548;
-
-  border: 4px solid #543e2d;
-}
-
-.left-door {
-  left: 3%;
-}
-
-.right-door {
-  right: 3%;
-}
-
-.door-handle {
-  position: absolute;
-
   top: 50%;
 
-  width: 7px;
+  width: 28px;
   height: 7px;
 
-  background: #33261c;
+  transform: translate(-50%, -50%);
+
+  background: #302219;
 }
 
-.left-door .door-handle {
-  right: 8%;
-}
 
-.right-door .door-handle {
-  left: 8%;
-}
+/* LEGS */
 
-.wardrobe-clothes {
+.desk-leg {
   position: absolute;
 
-  left: 22%;
-  right: 22%;
-  top: 24%;
+  bottom: -4%;
 
-  height: 40%;
+  width: 9%;
+  height: 50%;
 
-  background: #342c26;
+  background: #493527;
 
-  opacity: 0;
-
-  transition: opacity 0.3s steps(2);
+  z-index: 1;
 }
 
-.wardrobe-object:hover .wardrobe-clothes {
-  opacity: 1;
+.desk-leg.left {
+  left: 5%;
 }
 
-.shirt {
-  position: absolute;
-
-  top: 12%;
-
-  width: 22%;
-  height: 60%;
-
-  border: 2px solid #191614;
-}
-
-.shirt.black {
-  background: #201d1a;
-}
-
-.shirt.white {
-  left: 38%;
-
-  background: #e5dfd0;
-}
-
-.shirt:nth-child(1) {
-  left: 8%;
-}
-
-.shirt:nth-child(3) {
-  right: 8%;
+.desk-leg.right {
+  right: 5%;
 }
 
 
 /* =========================================================
-   PHOTO FRAME
+   DIARY
 ========================================================= */
 
-.picture-frame-object {
+.diary-object {
   position: absolute;
 
-  right: 20%;
-  top: 10%;
+  left: 8%;
+  top: 4%;
 
-  width: 11%;
-  aspect-ratio: 1;
+  width: 25%;
+  height: 31%;
 
-  border: 0;
-
-  background: transparent;
-
-  z-index: 6;
+  z-index: 20;
 }
 
-.frame-border {
+.diary-cover {
   position: absolute;
 
-  inset: 0;
+  left: 0;
+  top: 0;
 
-  padding: 7px;
-
-  background: #63482f;
-
-  border: 4px solid #453222;
-}
-
-.frame-photo {
   width: 100%;
   height: 100%;
 
-  display: flex;
+  background: #eee4cd;
 
-  align-items: center;
-  justify-content: center;
+  border: 4px solid #5b4d3d;
 
-  background: #d9d0bc;
+  box-shadow:
+    5px 5px 0 #473526;
+}
 
-  color: #776b58;
+.diary-pages {
+  position: absolute;
 
-  font-size: 9px;
+  left: 12%;
+  top: 14%;
+
+  width: 76%;
+  height: 65%;
+
+  border-left: 3px solid #c0b5a0;
+  border-right: 3px solid #c0b5a0;
+
+  z-index: 2;
+}
+
+.diary-line {
+  position: absolute;
+
+  left: 25%;
+  width: 50%;
+
+  height: 2px;
+
+  background: #aaa08d;
+
+  z-index: 3;
+}
+
+.diary-line.one {
+  top: 42%;
+}
+
+.diary-line.two {
+  top: 57%;
+}
+
+.object-label {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: -15px;
+
+  color: #4a392c;
+
+  font-size: 8px;
+
+  letter-spacing: 1px;
+
+  text-align: center;
 }
 
 
 /* =========================================================
-   CLOCK
+   CAKE
 ========================================================= */
 
-.wall-clock {
+.cake-object {
   position: absolute;
 
   left: 40%;
   top: 8%;
 
-  width: 9%;
-  aspect-ratio: 1;
+  width: 25%;
+  height: 27%;
 
-  border: 0;
-
-  background: transparent;
-
-  z-index: 7;
+  z-index: 20;
 }
 
-.clock-face {
+.cake-base {
+  position: absolute;
+
+  left: 5%;
+  right: 5%;
+  bottom: 4%;
+
+  height: 53%;
+
+  background: #4d2d21;
+
+  border: 4px solid #362019;
+}
+
+.cake-cream {
+  position: absolute;
+
+  left: 5%;
+  right: 5%;
+  bottom: 49%;
+
+  height: 18%;
+
+  background: #e4d1ad;
+
+  border: 3px solid #b59c75;
+}
+
+.cake-chocolate {
+  position: absolute;
+
+  left: 17%;
+  right: 17%;
+  top: 12%;
+
+  height: 13%;
+
+  background: #5a3324;
+}
+
+.cake-candle {
+  position: absolute;
+
+  left: 50%;
+  top: 0;
+
+  width: 5px;
+  height: 24px;
+
+  transform: translateX(-50%);
+
+  background: #eadcbd;
+}
+
+.cake-flame {
+  position: absolute;
+
+  left: 50%;
+  top: -9px;
+
+  width: 8px;
+  height: 9px;
+
+  transform: translateX(-50%);
+
+  background: #d4ac68;
+}
+
+
+/* =========================================================
+   SPEAKER
+========================================================= */
+
+.speaker-object {
+  position: absolute;
+
+  right: 5%;
+  top: 7%;
+
+  width: 20%;
+  height: 29%;
+
+  z-index: 20;
+}
+
+.speaker-body {
   position: absolute;
 
   inset: 0;
 
-  border: 6px solid #594634;
+  background: #51483e;
 
-  background: #eee5d2;
+  border: 5px solid #302923;
+
+  box-shadow:
+    4px 4px 0 #3b3027;
 }
 
-.clock-number {
-  position: absolute;
-
-  color: #4c4033;
-
-  font-size: 7px;
-
-  font-weight: bold;
-}
-
-.twelve {
-  top: 5px;
-  left: 50%;
-
-  transform: translateX(-50%);
-}
-
-.three {
-  right: 4px;
-  top: 50%;
-
-  transform: translateY(-50%);
-}
-
-.six {
-  bottom: 4px;
-  left: 50%;
-
-  transform: translateX(-50%);
-}
-
-.nine {
-  left: 4px;
-  top: 50%;
-
-  transform: translateY(-50%);
-}
-
-.clock-hand {
+.speaker-circle {
   position: absolute;
 
   left: 50%;
-  bottom: 50%;
+  top: 39%;
 
-  width: 3px;
+  width: 34px;
+  height: 34px;
 
-  transform-origin: bottom;
+  transform: translate(-50%, -50%);
 
-  background: #433528;
+  background: #897764;
+
+  border: 5px solid #29221d;
 }
 
-.clock-hand.hour {
-  height: 25%;
+.speaker-circle.small {
+  top: 75%;
 
-  transform: rotate(302deg);
-}
-
-.clock-hand.minute {
-  height: 37%;
-
-  transform: rotate(60deg);
+  width: 17px;
+  height: 17px;
 }
 
 
@@ -1195,30 +1351,26 @@ button {
   position: absolute;
 
   right: 7%;
-  top: 28%;
+  top: 29%;
 
   width: 9%;
-  height: 18%;
+  height: 20%;
 
-  border: 0;
-
-  background: transparent;
-
-  z-index: 8;
+  z-index: 18;
 }
 
 .lamp-shade {
   position: absolute;
 
-  left: 10%;
+  left: 8%;
   top: 0;
 
-  width: 80%;
+  width: 84%;
   height: 38%;
 
-  background: #e1cfaa;
+  background: #dfcba4;
 
-  border: 5px solid #765f45;
+  border: 5px solid #735c43;
 }
 
 .lamp-pole {
@@ -1228,11 +1380,11 @@ button {
   top: 35%;
 
   width: 5px;
-  height: 42%;
+  height: 43%;
 
   transform: translateX(-50%);
 
-  background: #66503b;
+  background: #604a36;
 }
 
 .lamp-base {
@@ -1244,7 +1396,7 @@ button {
   width: 60%;
   height: 12%;
 
-  background: #594331;
+  background: #523c2c;
 }
 
 
@@ -1255,17 +1407,13 @@ button {
 .rug-object {
   position: absolute;
 
-  left: 31%;
+  left: 30%;
   bottom: 4%;
 
-  width: 38%;
-  height: 19%;
+  width: 40%;
+  height: 18%;
 
-  border: 0;
-
-  background: transparent;
-
-  z-index: 8;
+  z-index: 7;
 }
 
 .rug-pattern {
@@ -1273,37 +1421,16 @@ button {
 
   inset: 0;
 
-  border: 8px solid #785f4b;
+  background: #9a7d63;
 
-  background: #9d8065;
+  border: 8px solid #715944;
 
   box-shadow:
-    inset 0 0 0 5px #b59a7c;
+    inset 0 0 0 5px #b19a7d;
 }
 
 .rug-object:hover .rug-pattern {
-  filter: brightness(1.1);
-}
-
-
-/* =========================================================
-   ROOM TITLE
-========================================================= */
-
-.room-title {
-  position: absolute;
-
-  left: 2%;
-
-  bottom: 2%;
-
-  color: rgba(238, 226, 201, 0.55);
-
-  font-size: 9px;
-
-  letter-spacing: 2px;
-
-  z-index: 30;
+  background: #a78a6e;
 }
 
 
@@ -1315,19 +1442,19 @@ button {
   position: absolute;
 
   left: 50%;
-  bottom: 4%;
+  bottom: 5%;
 
   transform: translateX(-50%);
 
-  max-width: 70%;
+  width: min(650px, 80%);
 
   padding: 12px 18px;
 
-  border: 4px solid #594936;
+  border: 4px solid #584734;
 
   background: #252019;
 
-  color: #f1e5cc;
+  color: #f0e3c9;
 
   font-size: 12px;
 
@@ -1337,13 +1464,34 @@ button {
 
   pointer-events: none;
 
-  transition: opacity 0.2s steps(2);
+  z-index: 200;
 
-  z-index: 100;
+  transition:
+    opacity 0.2s steps(2);
 }
 
 #room-message.show {
   opacity: 1;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.room-title {
+  position: absolute;
+
+  left: 18px;
+  bottom: 12px;
+
+  color: rgba(238, 226, 201, 0.55);
+
+  font-size: 9px;
+
+  letter-spacing: 2px;
+
+  z-index: 210;
 }
 
 
@@ -1361,14 +1509,12 @@ button {
   align-items: center;
   justify-content: space-between;
 
-  gap: 15px;
+  border: 4px solid #66523d;
 
-  border: 4px solid #66533e;
-
-  background: #2a241d;
+  background: #29231d;
 
   box-shadow:
-    6px 6px 0 rgba(50, 38, 27, 0.35);
+    6px 6px 0 #594838;
 }
 
 .hud-left {
@@ -1377,8 +1523,6 @@ button {
   align-items: center;
 
   gap: 25px;
-
-  min-width: 0;
 }
 
 .hud-title {
@@ -1396,9 +1540,9 @@ button {
 }
 
 #restart-button {
-  border: 3px solid #887456;
-
   padding: 8px 12px;
+
+  border: 3px solid #887456;
 
   background: #4d3e30;
 
@@ -1430,7 +1574,7 @@ button {
 
   padding: 20px;
 
-  background: rgba(20, 17, 13, 0.82);
+  background: rgba(20, 17, 13, 0.84);
 }
 
 .modal-box {
@@ -1459,8 +1603,8 @@ button {
 .modal-close {
   position: absolute;
 
-  right: 12px;
-  top: 10px;
+  right: 10px;
+  top: 8px;
 
   width: 35px;
   height: 35px;
@@ -1551,13 +1695,13 @@ button {
 
   border: 3px solid #79664c;
 
+  outline: none;
+
   background: #171411;
 
   color: #eee2c9;
 
   text-align: center;
-
-  outline: none;
 
   letter-spacing: 4px;
 }
@@ -1616,9 +1760,9 @@ button {
 }
 
 .final-box h2 {
-  font-size: 32px;
-
   margin-bottom: 5px;
+
+  font-size: 32px;
 }
 
 .final-cake {
@@ -1685,52 +1829,43 @@ button {
    RESPONSIVE
 ========================================================= */
 
-@media (max-width: 850px) {
+@media (max-width: 900px) {
+
+  .room {
+    height: 620px;
+    min-height: 620px;
+  }
+
+  .window-object {
+    left: 5%;
+    width: 30%;
+  }
+
+  .desk-object {
+    left: 5%;
+    width: 42%;
+  }
+
+  .bed-object {
+    right: 4%;
+    width: 48%;
+  }
+
+  .wardrobe-object {
+    width: 19%;
+  }
+}
+
+
+@media (max-width: 650px) {
 
   #game-screen {
     padding: 10px;
   }
 
   .room {
-    min-height: 520px;
-
-    aspect-ratio: auto;
-
-    height: 75vh;
-  }
-
-  .hud-left {
-    flex-direction: column;
-
-    align-items: flex-start;
-
-    gap: 5px;
-  }
-
-  .desk-object {
-    width: 43%;
-  }
-
-  .bed-object {
-    width: 50%;
-  }
-
-  .wardrobe-object {
-    width: 20%;
-  }
-}
-
-
-@media (max-width: 600px) {
-
-  .login-box {
-    padding: 35px 20px;
-  }
-
-  .room {
-    height: 70vh;
-
-    min-height: 480px;
+    height: 600px;
+    min-height: 600px;
   }
 
   .game-hud {
@@ -1740,11 +1875,15 @@ button {
   }
 
   .hud-left {
-    align-items: center;
+    justify-content: center;
   }
 
   #restart-button {
     width: 100%;
+  }
+
+  .login-box {
+    padding: 35px 20px;
   }
 
   .modal-box {
