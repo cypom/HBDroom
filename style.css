@@ -2191,3 +2191,201 @@ button {
 
   opacity: 1 !important;
 }
+
+/* =========================================
+   畫面層級修正
+========================================= */
+
+.hidden {
+  display: none !important;
+}
+
+
+/* 登入畫面 */
+#login-screen {
+  position: fixed !important;
+  inset: 0 !important;
+
+  width: 100vw !important;
+  height: 100vh !important;
+
+  z-index: 1000 !important;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: auto;
+}
+
+
+/* 房間 */
+#game-screen {
+  position: fixed !important;
+  inset: 0 !important;
+
+  width: 100vw !important;
+  height: 100vh !important;
+
+  z-index: 10 !important;
+
+  pointer-events: auto;
+}
+
+
+/* 窗簾 */
+#curtain-screen {
+  position: fixed !important;
+  inset: 0 !important;
+
+  width: 100vw !important;
+  height: 100vh !important;
+
+  z-index: 5000 !important;
+
+  pointer-events: none;
+}
+
+
+/* 窗簾過場結束 */
+#curtain-screen.hidden {
+  display: none !important;
+}
+
+
+/* =========================================
+   確保登入框真的可以輸入
+========================================= */
+
+.login-box {
+  position: relative !important;
+  z-index: 1100 !important;
+  pointer-events: auto !important;
+}
+
+
+#password-form {
+  position: relative !important;
+  z-index: 1101 !important;
+  pointer-events: auto !important;
+}
+
+
+#password-input {
+  position: relative !important;
+  z-index: 1102 !important;
+
+  pointer-events: auto !important;
+
+  user-select: text !important;
+  -webkit-user-select: text !important;
+
+  cursor: text !important;
+
+  opacity: 1 !important;
+}
+
+
+#access-button {
+  position: relative !important;
+  z-index: 1102 !important;
+
+  pointer-events: auto !important;
+
+  cursor: pointer !important;
+
+  opacity: 1 !important;
+}
+
+
+/* =========================================
+   房間本身
+========================================= */
+
+.game-screen {
+  overflow: hidden;
+}
+
+
+.room {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+}
+
+
+/* =========================================
+   房間物件一定在房間裡
+========================================= */
+
+.window {
+  z-index: 5;
+}
+
+.desk {
+  z-index: 20;
+}
+
+.bed {
+  z-index: 15;
+}
+
+.wardrobe {
+  z-index: 18;
+}
+
+.picture-frame {
+  z-index: 25;
+}
+
+.dog-plush {
+  z-index: 30;
+}
+
+.wall-clock {
+  z-index: 25;
+}
+
+.rug {
+  z-index: 10;
+}
+
+.room-message {
+  z-index: 100;
+}
+
+
+/* =========================================
+   房間提示
+========================================= */
+
+.room-message {
+  position: fixed;
+
+  left: 50%;
+  bottom: 8%;
+
+  transform: translateX(-50%);
+
+  padding: 12px 20px;
+
+  background: #332a23;
+  color: #f4e8cf;
+
+  border: 2px solid #8c7660;
+
+  font-family: monospace;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition: opacity 0.2s;
+}
+
+.room-message.show {
+  opacity: 1;
+}
