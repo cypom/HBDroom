@@ -2192,200 +2192,143 @@ button {
   opacity: 1 !important;
 }
 
-/* =========================================
-   畫面層級修正
-========================================= */
+/* =====================================================
+   最終畫面修正
+   ===================================================== */
 
-.hidden {
+/* 外層窗簾完全停用
+   房間自己的 curtain-transition 才負責開場 */
+
+#curtain-screen {
   display: none !important;
 }
 
 
-/* 登入畫面 */
-#login-screen {
+/* 房間畫面 */
+
+#game-screen {
   position: fixed !important;
+
   inset: 0 !important;
 
   width: 100vw !important;
+
   height: 100vh !important;
 
-  z-index: 1000 !important;
+  z-index: 100 !important;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow-y: auto !important;
 
-  pointer-events: auto;
+  overflow-x: hidden !important;
+
+  background: #272320;
+}
+
+
+/* hidden 一定真的隱藏 */
+
+#game-screen.hidden {
+  display: none !important;
+}
+
+
+/* 顯示時一定顯示 */
+
+#game-screen:not(.hidden) {
+  display: flex !important;
 }
 
 
 /* 房間 */
-#game-screen {
-  position: fixed !important;
-  inset: 0 !important;
 
-  width: 100vw !important;
-  height: 100vh !important;
-
-  z-index: 10 !important;
-
-  pointer-events: auto;
-}
-
-
-/* 窗簾 */
-#curtain-screen {
-  position: fixed !important;
-  inset: 0 !important;
-
-  width: 100vw !important;
-  height: 100vh !important;
-
-  z-index: 5000 !important;
-
-  pointer-events: none;
-}
-
-
-/* 窗簾過場結束 */
-#curtain-screen.hidden {
-  display: none !important;
-}
-
-
-/* =========================================
-   確保登入框真的可以輸入
-========================================= */
-
-.login-box {
-  position: relative !important;
-  z-index: 1100 !important;
-  pointer-events: auto !important;
-}
-
-
-#password-form {
-  position: relative !important;
-  z-index: 1101 !important;
-  pointer-events: auto !important;
-}
-
-
-#password-input {
-  position: relative !important;
-  z-index: 1102 !important;
-
-  pointer-events: auto !important;
-
-  user-select: text !important;
-  -webkit-user-select: text !important;
-
-  cursor: text !important;
-
-  opacity: 1 !important;
-}
-
-
-#access-button {
-  position: relative !important;
-  z-index: 1102 !important;
-
-  pointer-events: auto !important;
-
-  cursor: pointer !important;
-
-  opacity: 1 !important;
-}
-
-
-/* =========================================
-   房間本身
-========================================= */
-
-.game-screen {
-  overflow: hidden;
-}
-
-
-.room {
+#game-screen .game-wrapper {
   position: relative;
 
-  width: 100%;
-  height: 100%;
+  z-index: 101;
+
+  width: min(1220px, 100%);
+
+  margin: auto;
+}
+
+
+/* 真正的房間 */
+
+#game-screen #room {
+  position: relative;
+
+  z-index: 102;
 
   overflow: hidden;
+
+  isolation: isolate;
 }
 
 
-/* =========================================
-   房間物件一定在房間裡
-========================================= */
+/* 房間裡的物件 */
 
-.window {
-  z-index: 5;
-}
+#game-screen .scene-object {
+  pointer-events: auto;
 
-.desk {
-  z-index: 20;
-}
-
-.bed {
-  z-index: 15;
-}
-
-.wardrobe {
-  z-index: 18;
-}
-
-.picture-frame {
-  z-index: 25;
-}
-
-.dog-plush {
-  z-index: 30;
-}
-
-.wall-clock {
-  z-index: 25;
-}
-
-.rug {
-  z-index: 10;
-}
-
-.room-message {
-  z-index: 100;
+  z-index: 200;
 }
 
 
-/* =========================================
-   房間提示
-========================================= */
+/* 房間自己的窗簾只在開場時蓋住房間 */
 
-.room-message {
-  position: fixed;
+#curtain-transition {
+  position: absolute !important;
 
-  left: 50%;
-  bottom: 8%;
+  inset: 0 !important;
 
-  transform: translateX(-50%);
+  z-index: 9999 !important;
 
-  padding: 12px 20px;
+  pointer-events: none !important;
 
-  background: #332a23;
-  color: #f4e8cf;
+  display: flex !important;
 
-  border: 2px solid #8c7660;
-
-  font-family: monospace;
-
-  opacity: 0;
-
-  pointer-events: none;
-
-  transition: opacity 0.2s;
+  overflow: hidden !important;
 }
 
-.room-message.show {
-  opacity: 1;
+
+/* 開場窗簾 */
+
+#curtain-transition .transition-curtain {
+  position: relative;
+
+  width: 50%;
+
+  height: 100%;
+
+  background: var(--brown-dark);
+
+  border: 8px solid #251f1c;
+
+  transition:
+    transform 1.8s steps(8, end);
+}
+
+
+/* 左邊 */
+
+#curtain-transition .transition-left {
+  transform: translateX(0);
+}
+
+
+/* 右邊 */
+
+#curtain-transition .transition-right {
+  transform: translateX(0);
+}
+
+
+/* 打開 */
+
+#curtain-transition.open .transition-left {
+  transform: translateX(-100%);
+}
+
+#curtain-transition.open .transition-right {
+  transform: translateX(100%);
 }
