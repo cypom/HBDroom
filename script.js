@@ -1,407 +1,200 @@
-document.addEventListener("DOMContentLoaded", function () {
-
-  /* =====================================================
-     取得主要畫面
-     ===================================================== */
+document.addEventListener("DOMContentLoaded", () => {
+  // =========================
+  // 找到畫面
+  // =========================
 
   const loginScreen = document.getElementById("login-screen");
-  const gameScreen = document.getElementById("game-screen");
+
+  // 你的 HTML 目前有兩個 game-screen
+  // 我們直接指定「最後一個」＝真正完整的房間
+  const gameScreens = document.querySelectorAll("#game-screen");
+  const gameScreen = gameScreens[gameScreens.length - 1];
 
   const passwordForm = document.getElementById("password-form");
   const passwordInput = document.getElementById("password-input");
   const accessButton = document.getElementById("access-button");
   const loginMessage = document.getElementById("login-message");
 
-  const curtainTransition =
-    document.getElementById("curtain-transition");
+  const curtainTransition = document.getElementById("curtain-transition");
 
+  // =========================
+  // 初始狀態
+  // =========================
 
-  /* =====================================================
-     初始狀態
-     ===================================================== */
-
-  // 登入顯示
   loginScreen.classList.remove("hidden");
 
-  // 房間隱藏
-  gameScreen.classList.add("hidden");
+  // 把兩個 game-screen 都藏起來
+  gameScreens.forEach(screen => {
+    screen.classList.add("hidden");
+  });
 
-  // 密碼欄位自動取得焦點
-  setTimeout(function () {
-    passwordInput.focus();
-  }, 100);
+  // 舊的全螢幕 curtain 不使用
+  const oldCurtain = document.getElementById("curtain-screen");
 
+  if (oldCurtain) {
+    oldCurtain.classList.add("hidden");
+  }
 
-  /* =====================================================
-     密碼登入
-     ===================================================== */
+  passwordInput.focus();
 
-  passwordForm.addEventListener("submit", function (event) {
+  // =========================
+  // 密碼
+  // =========================
 
+  passwordForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
     const password = passwordInput.value.trim();
 
-
-    // 正確密碼
     if (password === "0530") {
 
       loginMessage.textContent = "ACCESS GRANTED";
-
       loginMessage.style.color = "#f4e8cf";
 
       passwordInput.disabled = true;
-
       accessButton.disabled = true;
 
+      // 稍微停一下，讓 ACCESS GRANTED 出現
+      setTimeout(() => {
 
-      /* ---------------------------------------------
-         登入畫面消失
-         --------------------------------------------- */
-
-      setTimeout(function () {
-
-        // 隱藏登入
+        // 隱藏登入畫面
         loginScreen.classList.add("hidden");
 
-        // 顯示真正的房間
+        // 顯示真正的完整房間
         gameScreen.classList.remove("hidden");
 
-        // 確保房間可以點
-        gameScreen.style.display = "flex";
+        // 確保舊 curtain 不會擋住房間
+        if (oldCurtain) {
+          oldCurtain.classList.add("hidden");
+        }
 
-        console.log("ROOM OPEN");
-
-
-        /* ---------------------------------------------
-           房間內部窗簾開始打開
-           --------------------------------------------- */
-
+        // 房間裡面的窗簾動畫
         if (curtainTransition) {
 
-          // 先確保窗簾是關閉的
           curtainTransition.classList.remove("open");
 
-          // 稍微等待房間出現
-          setTimeout(function () {
-
+          setTimeout(() => {
             curtainTransition.classList.add("open");
-
-          }, 200);
-
+          }, 100);
         }
 
       }, 700);
 
-
     } else {
 
-      /* ---------------------------------------------
-         密碼錯誤
-         --------------------------------------------- */
-
       loginMessage.textContent = "ACCESS DENIED";
-
       loginMessage.style.color = "#d6a88e";
 
       passwordInput.value = "";
 
-      passwordInput.focus();
-
+      setTimeout(() => {
+        passwordInput.focus();
+      }, 50);
     }
-
   });
 
 
+  // =========================
+  // 房間提示
+  // =========================
 
-  /* =====================================================
-     房間物件
-     ===================================================== */
+  const roomMessage = document.getElementById("room-message");
+
+  function showMessage(text) {
+
+    if (!roomMessage) return;
+
+    roomMessage.textContent = text;
+    roomMessage.classList.add("show");
+
+    setTimeout(() => {
+      roomMessage.classList.remove("show");
+    }, 2500);
+  }
+
+
+  // =========================
+  // 房間物件
+  // =========================
 
   const diary = document.getElementById("diary-object");
-
-  const drawer = document.getElementById("drawer-object");
-
   const dog = document.getElementById("dog-object");
-
   const wardrobe = document.getElementById("wardrobe-object");
-
-  const frame = document.getElementById("frame-object");
-
+  const pictureFrame = document.getElementById("picture-frame-object");
   const rug = document.getElementById("rug-object");
-
   const cake = document.getElementById("cake-object");
-
-  const clock = document.getElementById("clock-object");
-
+  const lamp = document.getElementById("lamp-object");
   const speaker = document.getElementById("speaker-object");
 
-  const lamp = document.getElementById("lamp-object");
-
-  const windowObject =
-    document.getElementById("window-object");
-
-  const sceneHint =
-    document.getElementById("scene-hint");
-
-
-
-  /* =====================================================
-     顯示房間提示
-     ===================================================== */
-
-  function showHint(text) {
-
-    if (!sceneHint) return;
-
-    sceneHint.textContent = text;
-
-    sceneHint.classList.remove("hidden");
-
-    setTimeout(function () {
-
-      sceneHint.classList.add("hidden");
-
-    }, 2500);
-
-  }
-
-
-
-  /* =====================================================
-     日記
-     ===================================================== */
 
   if (diary) {
-
-    diary.addEventListener("click", function () {
-
-      const modal =
-        document.getElementById("diary-modal");
-
-      if (modal) {
-
-        modal.classList.remove("hidden");
-
-      }
-
+    diary.addEventListener("click", () => {
+      showMessage("桌上的日記似乎藏著什麼秘密……");
     });
-
   }
 
-
-
-  /* =====================================================
-     抽屜
-     ===================================================== */
-
-  if (drawer) {
-
-    drawer.addEventListener("click", function () {
-
-      const modal =
-        document.getElementById("drawer-modal");
-
-      if (modal) {
-
-        modal.classList.remove("hidden");
-
-      }
-
-    });
-
-  }
-
-
-
-  /* =====================================================
-     小狗
-     ===================================================== */
 
   if (dog) {
-
-    dog.addEventListener("click", function () {
-
-      const modal =
-        document.getElementById("dog-modal");
-
-      if (modal) {
-
-        modal.classList.remove("hidden");
-
-      }
-
+    dog.addEventListener("click", () => {
+      showMessage("小狗的大貓咪");
     });
-
   }
 
-
-
-  /* =====================================================
-     衣櫃
-     ===================================================== */
 
   if (wardrobe) {
-
-    wardrobe.addEventListener("click", function () {
-
-      showHint(
-        "衣櫃裡掛著一件黑白色的衣服。"
-      );
-
+    wardrobe.addEventListener("click", () => {
+      showMessage("黑白色的衣服整齊掛在裡面。");
     });
-
   }
 
 
-
-  /* =====================================================
-     相框
-     ===================================================== */
-
-  if (frame) {
-
-    frame.addEventListener("click", function () {
-
-      showHint(
-        "一張被好好保存的回憶照片。"
-      );
-
+  if (pictureFrame) {
+    pictureFrame.addEventListener("click", () => {
+      showMessage("一張被好好保存的回憶。");
     });
-
   }
 
-
-
-  /* =====================================================
-     地毯
-     ===================================================== */
 
   if (rug) {
-
-    rug.addEventListener("click", function () {
-
-      showHint(
-        "地毯下面好像藏著什麼……"
-      );
-
+    rug.addEventListener("click", () => {
+      showMessage("地毯下面好像藏著東西……");
     });
-
   }
 
-
-
-  /* =====================================================
-     蛋糕
-     ===================================================== */
 
   if (cake) {
-
-    cake.addEventListener("click", function () {
-
-      showHint(
-        "今天的蛋糕，似乎不只是蛋糕。"
-      );
-
+    cake.addEventListener("click", () => {
+      showMessage("桌上的蛋糕還沒有被吃掉。");
     });
-
   }
 
-
-
-  /* =====================================================
-     時鐘
-     ===================================================== */
-
-  if (clock) {
-
-    clock.addEventListener("click", function () {
-
-      showHint(
-        "時鐘停在 10:05。"
-      );
-
-    });
-
-  }
-
-
-
-  /* =====================================================
-     音響
-     ===================================================== */
-
-  if (speaker) {
-
-    speaker.addEventListener("click", function () {
-
-      showHint(
-        "音響裡似乎還留著一段熟悉的旋律。"
-      );
-
-    });
-
-  }
-
-
-
-  /* =====================================================
-     檯燈
-     ===================================================== */
 
   if (lamp) {
-
-    lamp.addEventListener("click", function () {
-
-      showHint(
-        "燈光讓房間變得更溫暖了。"
-      );
-
+    lamp.addEventListener("click", () => {
+      showMessage("燈光讓整個房間變得溫暖起來。");
     });
-
   }
 
 
-
-  /* =====================================================
-     窗戶
-     ===================================================== */
-
-  if (windowObject) {
-
-    windowObject.addEventListener("click", function () {
-
-      showHint(
-        "窗外的天氣很好。"
-      );
-
+  if (speaker) {
+    speaker.addEventListener("click", () => {
+      showMessage("音響裡似乎藏著一段熟悉的旋律。");
     });
-
   }
 
 
+  // =========================
+  // 關閉所有 modal
+  // =========================
 
-  /* =====================================================
-     Modal 關閉
-     ===================================================== */
+  document.querySelectorAll(".modal-close").forEach(button => {
 
-  const closeButtons =
-    document.querySelectorAll("[data-close]");
+    button.addEventListener("click", () => {
 
-  closeButtons.forEach(function (button) {
+      const modal = button.closest(".modal");
 
-    button.addEventListener("click", function () {
-
-      const targetId =
-        button.getAttribute("data-close");
-
-      const target =
-        document.getElementById(targetId);
-
-      if (target) {
-
-        target.classList.add("hidden");
-
+      if (modal) {
+        modal.classList.remove("show");
       }
 
     });
@@ -409,86 +202,17 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
+  // 點 modal 外面也可以關閉
+  document.querySelectorAll(".modal").forEach(modal => {
 
-  /* =====================================================
-     抽屜密碼
-     ===================================================== */
+    modal.addEventListener("click", (event) => {
 
-  const drawerInput =
-    document.getElementById("drawer-input");
-
-  const drawerSubmit =
-    document.getElementById("drawer-submit");
-
-  const drawerMessage =
-    document.getElementById("drawer-message");
-
-
-  if (drawerSubmit) {
-
-    drawerSubmit.addEventListener("click", function () {
-
-      const answer =
-        drawerInput.value.trim();
-
-
-      if (answer === "10:05") {
-
-        drawerMessage.textContent =
-          "UNLOCKED";
-
-        drawerMessage.style.color =
-          "#71806a";
-
-        setTimeout(function () {
-
-          const modal =
-            document.getElementById("drawer-modal");
-
-          if (modal) {
-
-            modal.classList.add("hidden");
-
-          }
-
-          showHint(
-            "Treasure 01 找到了！"
-          );
-
-        }, 700);
-
-
-      } else {
-
-        drawerMessage.textContent =
-          "錯誤的時間";
-
-        drawerMessage.style.color =
-          "#a47f61";
-
+      if (event.target === modal) {
+        modal.classList.remove("show");
       }
 
     });
 
-  }
-
-
-
-  /* =====================================================
-     重新開始
-     ===================================================== */
-
-  const restartButton =
-    document.getElementById("restart-button");
-
-  if (restartButton) {
-
-    restartButton.addEventListener("click", function () {
-
-      location.reload();
-
-    });
-
-  }
+  });
 
 });
